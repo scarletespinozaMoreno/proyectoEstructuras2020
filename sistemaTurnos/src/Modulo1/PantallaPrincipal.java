@@ -5,6 +5,7 @@
  */
 package Modulo1;
 
+
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,11 +14,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -30,12 +29,9 @@ public class PantallaPrincipal {
     private BorderPane root;
     private Label tiempo;
     static  Label mensaje;
-    //private Pane root2 = new Pane();
-   
     private Button btnPuestos = new Button ("Puesto");
     private Button btnMedico = new Button ("Medico");
     private Button btnAcceder = new Button ("Acceder");
-
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -63,7 +59,7 @@ public class PantallaPrincipal {
         HBox botones=new HBox();
         botones.setAlignment(Pos.CENTER);
         Button crearPaciente=new Button("Crear Paciente");
-        Button puestoMedico=new Button("Puesto Medico");
+        Button puestoMedico=new Button("Asignar Puesto-Medico");
         botones.setSpacing(30);
         botones.setPadding(new Insets(5,5,5,5));
         Button atenderTurno=new Button("Atender turno");
@@ -96,7 +92,9 @@ public class PantallaPrincipal {
      
      
      public Pane crearIzquierda(){
-         VBox izquierda=new VBox();
+        VBox izquierda=new VBox();
+        
+        
          return izquierda;
      }
         
@@ -108,10 +106,10 @@ public class PantallaPrincipal {
             
             while (true){
                 try {
-                LocalDateTime l2=LocalDateTime.now();
+                LocalDateTime hora=LocalDateTime.now();
                 Platform.runLater(()->{
                     
-                    tiempo.setText(String.valueOf(l2.getHour())+" : "+String.valueOf(l2.getMinute()));
+                    tiempo.setText(String.valueOf(hora.getHour())+" : "+String.valueOf(hora.getMinute())+" : "+String.valueOf(hora.getSecond()));
                     tiempo.setTextFill(Color.web("#2E86C1"));
                 });
                 Thread.sleep(1000);
@@ -124,6 +122,7 @@ public class PantallaPrincipal {
     
      }
     
+  
     
      public Pane getRoot() {
         return root;
