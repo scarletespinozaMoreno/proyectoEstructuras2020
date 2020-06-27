@@ -31,7 +31,7 @@ public class PantallaPrincipal {
     private Label tiempo;
     static  Label mensaje;
     //private Pane root2 = new Pane();
-    private ImageView fondo = new ImageView ( "imagenes/fondoInicio.jpg");
+   
     private Button btnPuestos = new Button ("Puesto");
     private Button btnMedico = new Button ("Medico");
     private Button btnAcceder = new Button ("Acceder");
@@ -55,29 +55,33 @@ public class PantallaPrincipal {
     }
     
     public Pane crearArriba(){
-        HBox arriba=new HBox();
+        VBox arriba=new VBox();
         arriba.setPadding(new Insets(5,5,5,5));
         arriba.setAlignment(Pos.CENTER_RIGHT);
+        HBox botones=new HBox();
+        botones.setAlignment(Pos.CENTER);
+        Button crearPaciente=new Button("Crear Paciente");
+        Button puestoMedico=new Button("Puesto Medico");
+        botones.setSpacing(30);
+        botones.setPadding(new Insets(5,5,5,5));
+        Button atenderTurno=new Button("Atender turno");
+        botones.getChildren().addAll(crearPaciente,puestoMedico,atenderTurno);
         tiempo=new Label("");
         tiempo.setFont(new Font("Arial Black",25));
         arriba.getChildren().add(tiempo);
-        
+        arriba.getChildren().add(botones);
         return arriba;
         
     }
     public Pane crearBajo(){
-        VBox abajo = new VBox();
+        HBox abajo = new HBox();
         abajo.setAlignment(Pos.CENTER);
         abajo.setPadding(new Insets(5,5,5,5));
-        HBox botones=new HBox();
-        botones.setAlignment(Pos.CENTER);
         
-        botones.setSpacing(30);
-        botones.setPadding(new Insets(5,5,5,5));
+        
         
         mensaje=new Label("");
-        botones.getChildren().addAll(mensaje);
-        abajo.getChildren().add(botones);
+        abajo.getChildren().addAll(mensaje);
         Label mensajer= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos"
                 + " de 9 a 14 hs");
         mensajer.setStyle("-fx-background-color:#2E86C1");
@@ -139,15 +143,7 @@ public class PantallaPrincipal {
     }
 
 
-    
-    public ImageView getFondo() {
-        return fondo;
-    }
-
-    public void setFondo(ImageView fondo) {
-        this.fondo = fondo;
-    }
-
+ 
     public Button getBtnPuestos() {
         return btnPuestos;
     }
