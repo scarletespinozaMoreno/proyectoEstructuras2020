@@ -47,6 +47,8 @@ public class PantallaPrincipal {
         root=new BorderPane();
         root.setTop(crearArriba());
         root.setBottom(crearBajo());
+        root.setCenter(crearDerecha());
+        root.setLeft(crearIzquierda());
         root.setStyle("-fx-background-color: #FFFFFF;");
         
         
@@ -72,27 +74,33 @@ public class PantallaPrincipal {
         arriba.getChildren().add(botones);
         return arriba;
         
-    }
+       }
+    
     public Pane crearBajo(){
         HBox abajo = new HBox();
         abajo.setAlignment(Pos.CENTER);
         abajo.setPadding(new Insets(5,5,5,5));
-        
-        
-        
-        mensaje=new Label("");
-        abajo.getChildren().addAll(mensaje);
-        Label mensajer= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos"
-                + " de 9 a 14 hs");
-        mensajer.setStyle("-fx-background-color:#2E86C1");
-        mensajer.setFont(new Font("Arial Black",14));
-        mensajer.setTextFill(Color.web("#FFFFFF"));
-        abajo.getChildren().add(mensajer);
-        
+        Label Mensaje= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos" + " de 9 a 14 hs");
+        Mensaje.setStyle("-fx-background-color:#2E86C1");
+        Mensaje.setFont(new Font("Arial Black",14));
+        Mensaje.setTextFill(Color.web("#FFFFFF"));
+        abajo.getChildren().add(Mensaje);
         return abajo; 
     }
     
-    
+     public Pane crearDerecha(){
+         HBox derecha=new HBox();
+         
+         return derecha;
+     }
+     
+     
+     public Pane crearIzquierda(){
+         VBox izquierda=new VBox();
+         return izquierda;
+     }
+        
+     
     public class tiempo implements Runnable{
 
         @Override
