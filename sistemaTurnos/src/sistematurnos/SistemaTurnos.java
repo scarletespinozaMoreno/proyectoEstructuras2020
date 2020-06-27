@@ -5,12 +5,13 @@
  */
 package sistematurnos;
 
-import Modulo1.ventanaAcceder;
-import Modulo1.ventanaCrearMedico;
-import Modulo1.ventanaMenu;
-import Modulo1.ventanaCrearPuesto;
+import Modulo1.ventanaAtencion;
+import Modulo1.VentanaFormularioDoctor;
+import Modulo1.PantallaPrincipal;
+import Modulo1.ventanaPuesto;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -20,33 +21,25 @@ import javafx.stage.Stage;
  */
 public class SistemaTurnos extends Application {
 
-    /**
-     * @param args the command line arguments
-     */
-    
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage ventana) throws InterruptedException {
+        //ventana principal
         
-        ventanaMenu ventanaInicio= new ventanaMenu();
-        ventanaCrearPuesto ventanaPuesto= new ventanaCrearPuesto();
-        ventanaCrearMedico ventanaMedico= new ventanaCrearMedico();
-        ventanaAcceder ventanaAcceder = new ventanaAcceder();
+        ventana=new Stage();
+        ventana.setTitle("Sistema de turnos");
+        PantallaPrincipal Pantalla=new PantallaPrincipal();
+        Scene sc=new Scene(Pantalla.getRoot());
+        ventana.setScene(sc);
+        ventana.setWidth(700);
+        ventana.setHeight(580);
+        ventana.show();
         
-        Scene scVentana1 = new Scene(ventanaInicio.getRoot(),600,600);
-        Scene scVentana2 = new Scene(ventanaPuesto.getRoot(),600,600);
-        Scene scVentana3 = new Scene(ventanaMedico.getRoot(),600,600);
-        //Scene scVentana4 = new Scene(ventanaAcceder.getRoot(), 610, 390);
-        
-        ventanaInicio.getBtnPuestos().setOnAction(e -> primaryStage.setScene(scVentana2));
-        ventanaInicio.getBtnMedico().setOnAction(e -> primaryStage.setScene(scVentana3));
-        primaryStage.setScene(scVentana1);
-        primaryStage.setTitle("Servicio de atencion medica");
-        primaryStage.show();
+        ventana.setOnCloseRequest(e->{
+            Platform.exit();
+            System.exit(0);
+        });
     }
-    
-    public static void main(String[] args){
-        // TODO code application logic here
+    public static void main(String[] args) {
         launch(args);
     }
-    
 }

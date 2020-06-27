@@ -13,12 +13,12 @@ import javafx.scene.layout.StackPane;
  *
  * @author scarlet Espinoza
  */
-public class ventanaCrearMedico {
+public class VentanaFormularioDoctor {
     private StackPane root = new StackPane();
     private Pane root2 = new Pane();
     private ImageView fondo = new ImageView ("imagenes/fondoInicio.jpg");
 
-    public ventanaCrearMedico() {
+    public VentanaFormularioDoctor() {
         OrganizarVentana();
     }
      

@@ -13,12 +13,12 @@ import javafx.scene.layout.StackPane;
  *
  * @author scarlet Espinoza
  */
-public class ventanaCrearPuesto {
+public class ventanaPuesto {
     private StackPane root = new StackPane();
     private Pane root2 = new Pane();
     private ImageView fondo = new ImageView ("imagenes/fondoInicio.jpg");
 
-    public ventanaCrearPuesto() {
+    public ventanaPuesto() {
         OrganizarVentana();
     }
      

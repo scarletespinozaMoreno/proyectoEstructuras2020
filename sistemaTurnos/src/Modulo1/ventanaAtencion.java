@@ -9,6 +9,6 @@ package Modulo1;
  *
  * @author scarlet Espinoza
  */
-public class ventanaAcceder {
+public class ventanaAtencion {
     
 }
