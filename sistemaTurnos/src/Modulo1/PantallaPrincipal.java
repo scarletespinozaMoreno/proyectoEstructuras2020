@@ -157,8 +157,33 @@ public class PantallaPrincipal {
         reproductorVideos.setFitHeight(300);
         reproductorVideos.setFitWidth(300);
         reproductorVideos.setStyle("-fx-background-color: #FFFFFF;");
+        HBox botones=new HBox();
+        botones.setAlignment(Pos.CENTER);
+        botones.setPadding(new Insets(5,5,5,5));
+        botones.setSpacing(20);
+        Button siguiente=new Button(">>");
+        siguiente.setOnAction((e)->{
+            reproductorVideos.getMediaPlayer().stop();
+            File f=new File(iterador.next());
+            MediaPlayer sig=new MediaPlayer(new Media(f.toURI().toString()));
+            
+            reproductorVideos.setMediaPlayer(sig);
+            sig.play();
+           
+        });
         
-        izquierda.getChildren().addAll(reproductorVideos);
+        Button anterior=new Button("<<");
+        anterior.setOnAction(z->{
+            reproductorVideos.getMediaPlayer().stop();
+            File f=new File(iterador.previous());
+            MediaPlayer ant=new MediaPlayer(new Media(f.toURI().toString()));
+            ant.play();
+            reproductorVideos.setMediaPlayer(ant);
+        });
+        botones.getChildren().addAll(anterior,siguiente);
+        
+        izquierda.getChildren().addAll(reproductorVideos,botones);
+        
         
          return izquierda;
      }
