@@ -63,14 +63,14 @@ public class PantallaPrincipal {
     
     public Pane crearTop(){
         VBox arriba=new VBox();
-        arriba.setPadding(new Insets(5,5,5,5));
+        arriba.setPadding(new Insets(7,7,7,7));
         arriba.setAlignment(Pos.CENTER_RIGHT);
         HBox botones=new HBox();
         botones.setAlignment(Pos.CENTER);
         Button crearPaciente=new Button("Crear Paciente");
         Button puestoMedico=new Button("Asignar Puesto-Medico");
         botones.setSpacing(30);
-        botones.setPadding(new Insets(5,5,5,5));
+        botones.setPadding(new Insets(10,10,10,10));
         Button atenderTurno=new Button("Atender turno");
         botones.getChildren().addAll(crearPaciente,puestoMedico,atenderTurno);
         tiempo=new Label("");
@@ -84,18 +84,20 @@ public class PantallaPrincipal {
     public Pane crearButton(){
         HBox abajo = new HBox();
         abajo.setAlignment(Pos.CENTER);
-        abajo.setPadding(new Insets(5,5,5,5));
+        abajo.setPadding(new Insets(10,10,10,10));
+        Label vacio = new Label("  ");
+        
         Label Mensaje= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos" + " de 9 a 14 hs");
         Mensaje.setStyle("-fx-background-color:#2E86C1");
-        Mensaje.setFont(new Font("Arial Black",14));
+        Mensaje.setFont(new Font("Arial Black",13.5));
         Mensaje.setTextFill(Color.web("#FFFFFF"));
         abajo.getChildren().add(Mensaje);
         return abajo; 
     }
     
      public Pane crearCenter(){
-         HBox derecha=new HBox();
-         
+        HBox derecha=new HBox();
+        
          return derecha;
      }
      
@@ -103,9 +105,8 @@ public class PantallaPrincipal {
     public Pane crearLeft(){
         VBox izquierda=new VBox();
         izquierda.setStyle("-fx-background-color:#2E86C1");
-        izquierda.setPrefHeight(300);
         izquierda.setAlignment(Pos.CENTER);
-        izquierda.setPadding(new Insets(15,15,15,15));
+        izquierda.setPadding(new Insets(20,2,20,20));
         ListaCircularDoble<String> lista=LecturaEscritura.leerVideos();
         iterador=lista.listIterator(0);
         reproductorVideos=this.crearMediaView(iterador);
