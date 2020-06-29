@@ -105,7 +105,7 @@ public class PantallaPrincipal {
         
         HBox cuadro1Titulo=new HBox();
         cuadro1Titulo.setPrefHeight(80);
-        cuadro1Titulo.setPrefWidth(100);
+        cuadro1Titulo.setPrefWidth(120);
         cuadro1Titulo.setAlignment(Pos.CENTER);
         cuadro1Titulo.setStyle("-fx-background-color:#87CEFA");
         Label encabezado1=new Label("Turno");
@@ -114,12 +114,32 @@ public class PantallaPrincipal {
         
         HBox cuadro2Turno=new HBox();
         cuadro2Turno.setPrefHeight(80);
-        cuadro2Turno.setPrefWidth(100);
+        cuadro2Turno.setPrefWidth(120);
         cuadro2Turno.setAlignment(Pos.CENTER);
         cuadro2Turno.setStyle("-fx-background-color:#87CEFA");
         turno.getChildren().addAll(cuadro1Titulo,cuadro2Turno);
         
-        derecha.getChildren().addAll(turno);
+        VBox puesto=new VBox();
+        puesto.setSpacing(5);
+        
+        HBox cuadro3Titulo=new HBox();
+        cuadro3Titulo.setPrefHeight(80);
+        cuadro3Titulo.setPrefWidth(120);
+        cuadro3Titulo.setAlignment(Pos.CENTER);
+        cuadro3Titulo.setStyle("-fx-background-color:#2E86C1");
+        HBox cuadro4Puesto=new HBox();
+        cuadro4Puesto.setPrefHeight(80);
+        cuadro4Puesto.setPrefWidth(120);
+        cuadro4Puesto.setAlignment(Pos.CENTER);
+        cuadro4Puesto.setStyle("-fx-background-color:#2E86C1");
+        
+        Label encabezado2=new Label("Puesto");
+        encabezado2.setFont(new Font("Arial Black",22));
+        
+        cuadro3Titulo.getChildren().add(encabezado2);
+        puesto.getChildren().addAll(cuadro3Titulo,cuadro4Puesto);
+        
+        derecha.getChildren().addAll(turno,puesto);
         
          return derecha;
      }
