@@ -6,6 +6,8 @@
 package Modulo1;
 
 
+import ListaCircularDoble.ListaCircularDoble;
+import clases.LecturaEscritura;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ListIterator;
@@ -37,6 +39,8 @@ public class PantallaPrincipal {
     private Button btnPuestos = new Button ("Puesto");
     private Button btnMedico = new Button ("Medico");
     private Button btnAcceder = new Button ("Acceder");
+    private ListIterator<String> iterador;
+    private MediaView reproductorVideos;
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -46,10 +50,10 @@ public class PantallaPrincipal {
 
     public void OrganizarVentana() throws InterruptedException{
         root=new BorderPane();
-        root.setTop(crearArriba());
-        root.setBottom(crearBajo());
-        root.setCenter(crearDerecha());
-        root.setLeft(crearIzquierda());
+        root.setTop(crearTop());
+        root.setBottom(crearButton());
+        root.setCenter(crearCenter());
+        root.setLeft(crearLeft());
         root.setStyle("-fx-background-color: #FFFFFF;");
         
         
@@ -57,7 +61,7 @@ public class PantallaPrincipal {
         t1.start();
     }
     
-    public Pane crearArriba(){
+    public Pane crearTop(){
         VBox arriba=new VBox();
         arriba.setPadding(new Insets(5,5,5,5));
         arriba.setAlignment(Pos.CENTER_RIGHT);
@@ -77,7 +81,7 @@ public class PantallaPrincipal {
         
        }
     
-    public Pane crearBajo(){
+    public Pane crearButton(){
         HBox abajo = new HBox();
         abajo.setAlignment(Pos.CENTER);
         abajo.setPadding(new Insets(5,5,5,5));
@@ -89,19 +93,30 @@ public class PantallaPrincipal {
         return abajo; 
     }
     
-     public Pane crearDerecha(){
+     public Pane crearCenter(){
          HBox derecha=new HBox();
          
          return derecha;
      }
      
      
-     public Pane crearIzquierda(){
+    public Pane crearLeft(){
         VBox izquierda=new VBox();
-        
+        izquierda.setStyle("-fx-background-color:#2E86C1");
+        izquierda.setPrefHeight(300);
+        izquierda.setAlignment(Pos.CENTER);
+        izquierda.setPadding(new Insets(15,15,15,15));
+        ListaCircularDoble<String> lista=LecturaEscritura.leerVideos();
+        iterador=lista.listIterator(0);
+        reproductorVideos=this.crearMediaView(iterador);
+        reproductorVideos.setFitHeight(300);
+        reproductorVideos.setFitWidth(300);
+        reproductorVideos.setStyle("-fx-background-color: #FFFFFF;");
+        izquierda.getChildren().addAll(reproductorVideos);
         
          return izquierda;
      }
+       
         
      
     public class tiempo implements Runnable{
@@ -127,19 +142,19 @@ public class PantallaPrincipal {
     
      }
     
-    public MediaView createMediaView(ListIterator<String> direcciones){
+    public MediaView crearMediaView(ListIterator<String> direcciones){
         MediaView mediaView = new MediaView();
-        initMediaPlayer(mediaView, direcciones);
+        iniciarlizarMediaPlayer(mediaView, direcciones);
         return mediaView;
      }
     
-    private void initMediaPlayer(final MediaView mediaView, final ListIterator<String>direcciones){
+    private void iniciarlizarMediaPlayer(final MediaView mediaView, final ListIterator<String>direcciones){
         if (direcciones.hasNext()){
             File f=new File(direcciones.next());
             MediaPlayer mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
             mediaPlayer.play();
             mediaPlayer.setOnEndOfMedia(() -> {
-                initMediaPlayer(mediaView, direcciones);
+                iniciarlizarMediaPlayer(mediaView, direcciones);
             });
             mediaView.setMediaPlayer(mediaPlayer);
 
