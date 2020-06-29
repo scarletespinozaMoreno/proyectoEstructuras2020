@@ -6,7 +6,9 @@
 package Modulo1;
 
 
+import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -18,6 +20,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -122,7 +127,24 @@ public class PantallaPrincipal {
     
      }
     
-  
+    public MediaView createMediaView(ListIterator<String> direcciones){
+        MediaView mediaView = new MediaView();
+        initMediaPlayer(mediaView, direcciones);
+        return mediaView;
+     }
+    
+    private void initMediaPlayer(final MediaView mediaView, final ListIterator<String>direcciones){
+        if (direcciones.hasNext()){
+            File f=new File(direcciones.next());
+            MediaPlayer mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
+            mediaPlayer.play();
+            mediaPlayer.setOnEndOfMedia(() -> {
+                initMediaPlayer(mediaView, direcciones);
+            });
+            mediaView.setMediaPlayer(mediaPlayer);
+
+            } 
+    }
     
      public Pane getRoot() {
         return root;
