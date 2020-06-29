@@ -97,6 +97,29 @@ public class PantallaPrincipal {
     
      public Pane crearCenter(){
         HBox derecha=new HBox();
+        derecha.setSpacing(15);
+        derecha.setPadding(new Insets(20,20,20,20));
+        
+        VBox turno=new VBox();
+        turno.setSpacing(6);
+        
+        HBox cuadro1Titulo=new HBox();
+        cuadro1Titulo.setPrefHeight(80);
+        cuadro1Titulo.setPrefWidth(100);
+        cuadro1Titulo.setAlignment(Pos.CENTER);
+        cuadro1Titulo.setStyle("-fx-background-color:#87CEFA");
+        Label encabezado1=new Label("Turno");
+        encabezado1.setFont(new Font("Arial Black",22));
+        cuadro1Titulo.getChildren().add(encabezado1);
+        
+        HBox cuadro2Turno=new HBox();
+        cuadro2Turno.setPrefHeight(80);
+        cuadro2Turno.setPrefWidth(100);
+        cuadro2Turno.setAlignment(Pos.CENTER);
+        cuadro2Turno.setStyle("-fx-background-color:#87CEFA");
+        turno.getChildren().addAll(cuadro1Titulo,cuadro2Turno);
+        
+        derecha.getChildren().addAll(turno);
         
          return derecha;
      }
