@@ -89,7 +89,7 @@ public class PantallaPrincipal {
         
         Label Mensaje= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos" + " de 9 a 14 hs");
         Mensaje.setStyle("-fx-background-color:#2E86C1");
-        Mensaje.setFont(new Font("Arial Black",13.5));
+        Mensaje.setFont(new Font("Arial Black",12.7));
         Mensaje.setTextFill(Color.web("#FFFFFF"));
         abajo.getChildren().add(Mensaje);
         return abajo; 
@@ -97,6 +97,7 @@ public class PantallaPrincipal {
     
      public Pane crearCenter(){
         HBox derecha=new HBox();
+        derecha.setAlignment(Pos.CENTER);
         derecha.setSpacing(15);
         derecha.setPadding(new Insets(20,20,20,20));
         
@@ -149,13 +150,14 @@ public class PantallaPrincipal {
         VBox izquierda=new VBox();
         izquierda.setStyle("-fx-background-color:#2E86C1");
         izquierda.setAlignment(Pos.CENTER);
-        izquierda.setPadding(new Insets(20,2,20,20));
+        izquierda.setPadding(new Insets(20,20,20,20));
         ListaCircularDoble<String> lista=LecturaEscritura.leerVideos();
         iterador=lista.listIterator(0);
         reproductorVideos=this.crearMediaView(iterador);
         reproductorVideos.setFitHeight(300);
         reproductorVideos.setFitWidth(300);
         reproductorVideos.setStyle("-fx-background-color: #FFFFFF;");
+        
         izquierda.getChildren().addAll(reproductorVideos);
         
          return izquierda;
