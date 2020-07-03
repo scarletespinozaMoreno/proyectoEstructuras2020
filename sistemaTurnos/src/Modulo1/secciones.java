@@ -5,7 +5,7 @@
  */
 package Modulo1;
 
-import static Modulo1.ventanaFormularioPaciente.combSintomas;
+
 import clases.LecturaEscritura;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -32,7 +32,7 @@ public class secciones {
         ventanaFormularioPaciente ventanaPaciente = new  ventanaFormularioPaciente();
         //combSintomas.getItems().addAll(LecturaEscritura.cargarSintomas());
         stageRegistrar.setScene(new Scene(ventanaPaciente.getRootPaciente()));
-        stageRegistrar.setWidth(480);
+        stageRegistrar.setWidth(490);
         stageRegistrar.setHeight(450);
         stageRegistrar.show();
     }

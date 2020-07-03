@@ -6,6 +6,20 @@
 package Modulo1;
 
 import clases.LecturaEscritura;
+import static clases.LecturaEscritura.leerSintomas;
+import clases.Paciente;
+import clases.Turno;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -25,10 +39,11 @@ import javafx.scene.text.Font;
  */
 public class ventanaFormularioPaciente {
     private BorderPane rootPaciente;
-    private Label titulo,nom,ape,e,ge;
+    private Label titulo,nom,ape,e,ge,mensaje;
     private TextField fieldNombre,fieldApellido,fieldEdad,fieldGenero;
-    private Button registrar;
-    public static ComboBox combSintomas;
+    private Button registrar,limpiar;
+    private ComboBox combSintomas;
+    int num =0;
 
    
     
@@ -38,29 +53,98 @@ public class ventanaFormularioPaciente {
     }
     
     
-    
 
     public void OrganizarVentana() throws InterruptedException{
         rootPaciente=new BorderPane();
         rootPaciente.setStyle("-fx-background-color: #FFFFFF;");
         rootPaciente.setTop(crearTop());
         rootPaciente.setLeft(crearLeft());
-        //rootPaciente.setCenter(combSintomas);
+        rootPaciente.setCenter(crearCenter());
         rootPaciente.setBottom(crearBottom());
         
  
     }
      public Pane crearBottom(){
-         VBox abajo=new VBox();
+         HBox botones=new HBox();
+         VBox abajo= new VBox();
+         mensaje= new Label("");
          registrar= new Button("Registrar");
+         registrar.setOnAction((e)->{
+             try {
+                 buttonAceptar();
+             } catch (IOException ex) {
+                 Logger.getLogger(ventanaFormularioPaciente.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (InterruptedException ex) {
+                 Logger.getLogger(ventanaFormularioPaciente.class.getName()).log(Level.SEVERE, null, ex);
+             }
+          
+        });
+         limpiar= new Button("Limpiar");
+         limpiar.setOnAction((e)->{
+            buttonBorrar();
+          
+        });
+         
+         botones.setSpacing(20);
+         botones.setAlignment(Pos.CENTER);
+         botones.getChildren().addAll(registrar, limpiar);
          abajo.setPadding(new Insets(20,20,20,20));
-         abajo.getChildren().addAll(registrar);
+         abajo.setSpacing(20);
+         abajo.getChildren().addAll(botones,mensaje);
          abajo.setAlignment(Pos.CENTER);
          return abajo;
      }
+     
+      public void buttonAceptar() throws IOException, InterruptedException{
+        if(fieldNombre.getText().equals("")||fieldApellido.getText().equals("")||fieldGenero.getText().equals("")||fieldEdad.getText().equals("")){
+            mensaje.setStyle("-fx-text-fill:#2E86C1");
+            mensaje.setText("Campos Obligatorios!!");
+            return;
+        } 
+        BufferedWriter output=null;
+        FileWriter fw =null;
+        Turno turnos;
+        try{
+            File file = new File("src/recursos/formularioPaciente.txt");
+            output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
+            output.write(fieldNombre.getText()+","+fieldApellido.getText()+","+fieldGenero.getText()+","+
+                    fieldEdad.getText()+","+(String)combSintomas.getValue());
+            output.newLine();
+            mensaje.setTextFill(Color.RED);
+            mensaje.setText("Registrado...");
+            /*
+            List<String> sint=leerSintomas(String.valueOf(combSintomas.getValue()));
+            turnos = new Turno(String.valueOf(++num), new Paciente(fieldNombre.getText(),fieldApellido.getText(), 
+                    fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(String)combSintomas.getValue(),
+                    Integer.valueOf(sint.get(0)),sint.get(1)));
+            PantallaPrincipal.TURNO.offer(turnos);
+             */
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(output!=null)
+                    output.close();
+                if(fw!=null)
+                    fw.close();
+            }catch(IOException e){
+                e.getMessage();
+            }
+        }
+    }
+     public void buttonBorrar(){
+        fieldNombre.setText("");
+        fieldApellido.setText("");
+        fieldEdad.setText("");
+        fieldGenero.setText("");
+        
+    }
+     
+    
+    
      public Pane crearTop(){
          VBox arriba=new VBox();
-         arriba.setPadding(new Insets(20,20,20,20));
+         arriba.setPadding(new Insets(25,20,20,20));
         arriba.setAlignment(Pos.CENTER);
          titulo = new Label("Formulario del paciente");
          titulo.setFont(new Font("Arial Black",19));
@@ -71,8 +155,10 @@ public class ventanaFormularioPaciente {
      }
      public Pane crearCenter(){
          VBox derecha=new VBox();
-          derecha.setPadding(new Insets(20,20,20,20));
-         
+          derecha.setPadding(new Insets(28,20,20,20));
+           List<String> lista= LecturaEscritura.cargarSintomas();
+          combSintomas = new ComboBox(FXCollections.observableArrayList(lista)); 
+          combSintomas.setStyle("-fx-background-color:#87CEFA");
          derecha.getChildren().addAll(combSintomas);
          return derecha;
      }
@@ -127,13 +213,7 @@ public class ventanaFormularioPaciente {
         this.rootPaciente = rootPaciente;
     }
 
-    public ComboBox getCombSintomas() {
-        return combSintomas;
-    }
-
-    public void setCombSintomas(ComboBox combSintomas) {
-        this.combSintomas = combSintomas;
-    }
+  
     
     
 }

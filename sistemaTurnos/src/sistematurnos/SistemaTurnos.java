@@ -29,7 +29,7 @@ public class SistemaTurnos extends Application {
         Scene sc=new Scene(Pantalla.getRoot());
         ventana.setScene(sc);
         ventana.setWidth(650);
-        ventana.setHeight(500);
+        ventana.setHeight(600);
         ventana.show();
         
         ventana.setOnCloseRequest(e->{

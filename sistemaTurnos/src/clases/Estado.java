@@ -9,6 +9,8 @@ package clases;
  *
  * @author scarlet Espinoza
  */
-public class Estado {
-    
+public enum Estado {
+    ATENDIDO,
+    EN_ESPERA,
+    ATENDIENDO
 }
