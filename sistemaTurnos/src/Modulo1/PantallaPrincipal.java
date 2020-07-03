@@ -41,6 +41,7 @@ public class PantallaPrincipal {
     private Button btnAcceder = new Button ("Acceder");
     private ListIterator<String> iterador;
     private MediaView reproductorVideos;
+    private secciones pantallas = new secciones();
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -77,6 +78,34 @@ public class PantallaPrincipal {
         tiempo.setFont(new Font("Arial Black",25));
         arriba.getChildren().add(tiempo);
         arriba.getChildren().add(botones);
+        crearPaciente.setOnAction((e)-> {
+            try {
+                pantallas.pantallaPaciente();
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+       });
+        
+        
+        puestoMedico.setOnAction((e)->{
+            try {
+                pantallas.pantallaMedico();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+        });
+        
+        atenderTurno.setOnAction((e)->{
+            try {
+                pantallas.pantallaAtencion();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
         return arriba;
         
        }

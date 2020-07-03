@@ -9,6 +9,6 @@ package clases;
  *
  * @author scarlet Espinoza
  */
-public class Puesto {
+public class Atencion {
     
 }

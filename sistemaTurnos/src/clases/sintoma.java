@@ -9,30 +9,9 @@ package clases;
  *
  * @author scarlet Espinoza
  */
-public class sintoma {
+public class Sintoma {
     private String nombreSintoma;
-    private int prioridad;
-
-    public sintoma(String nombreSintoma, int prioridad) {
-        this.nombreSintoma = nombreSintoma;
-        this.prioridad = prioridad;
-    }
-
-    public String getNombreSintoma() {
-        return nombreSintoma;
-    }
-
-    public void setNombreSintoma(String nombreSintoma) {
-        this.nombreSintoma = nombreSintoma;
-    }
-
-    public int getPrioridad() {
-        return prioridad;
-    }
-
-    public void setPrioridad(int prioridad) {
-        this.prioridad = prioridad;
-    }
+    private int nivelPriotidad;
     
     
 }

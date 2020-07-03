@@ -9,6 +9,6 @@ package clases;
  *
  * @author scarlet Espinoza
  */
-public class turno {
+public class Turno {
     
 }
