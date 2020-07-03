@@ -112,13 +112,13 @@ public class ventanaFormularioPaciente {
             output.newLine();
             mensaje.setTextFill(Color.RED);
             mensaje.setText("Registrado...");
-            /*
+            
             List<String> sint=leerSintomas(String.valueOf(combSintomas.getValue()));
             turnos = new Turno(String.valueOf(++num), new Paciente(fieldNombre.getText(),fieldApellido.getText(), 
                     fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(String)combSintomas.getValue(),
                     Integer.valueOf(sint.get(0)),sint.get(1)));
             PantallaPrincipal.TURNO.offer(turnos);
-             */
+             
         }catch(IOException e){
             System.out.println(e.getMessage());
         }finally{

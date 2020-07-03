@@ -8,9 +8,11 @@ package Modulo1;
 
 import ListaCircularDoble.ListaCircularDoble;
 import clases.LecturaEscritura;
+import clases.Turno;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ListIterator;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -41,7 +43,8 @@ public class PantallaPrincipal {
     private Button btnAcceder = new Button ("Acceder");
     private ListIterator<String> iterador;
     private MediaView reproductorVideos;
-    private secciones pantallas = new secciones();
+    private final secciones pantallas = new secciones();
+    static final PriorityQueue<Turno> TURNO = new PriorityQueue<>((Turno t1, Turno t2)-> t1.getTipo()-t2.getTipo());
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -56,7 +59,7 @@ public class PantallaPrincipal {
         root.setCenter(crearCenter());
         root.setLeft(crearLeft());
         root.setStyle("-fx-background-color: #FFFFFF;");
-        
+         TURNO.addAll(Turno.asignarTurnos());
         
         Thread t1=new Thread(new tiempo());
         t1.start();

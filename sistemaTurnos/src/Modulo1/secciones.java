@@ -6,13 +6,9 @@
 package Modulo1;
 
 
-import clases.LecturaEscritura;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.stage.Stage;
 
 /**
@@ -30,7 +26,6 @@ public class secciones {
         stageRegistrar = new Stage();
         stageRegistrar.setTitle("Registro Pacientes");
         ventanaFormularioPaciente ventanaPaciente = new  ventanaFormularioPaciente();
-        //combSintomas.getItems().addAll(LecturaEscritura.cargarSintomas());
         stageRegistrar.setScene(new Scene(ventanaPaciente.getRootPaciente()));
         stageRegistrar.setWidth(490);
         stageRegistrar.setHeight(450);

@@ -52,8 +52,25 @@ public class LecturaEscritura {
         }
         return lista;
     }
+     public static LinkedList<Paciente> leerCliente(){
+        String filename ="src/recursos/formularioPaciente.txt";
+        LinkedList<Paciente> pacientes = new LinkedList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+            String linea;
+            while((linea=br.readLine())!=null){
+                
+                String[] data =linea.split(",");
+                List<String> s=leerSintomas(data[4]);
+                pacientes.add(new Paciente(data[0],data[1],data[2],Integer.parseInt(data[3]),data[4],Integer.valueOf(s.get(0)),s.get(1)));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pacientes;
+    }
+     
     public static List<String> leerSintomas(String nombreSintoma){
-        String filename ="src/espol/edu/ec/recursos/files/sintomas.txt";
+        String filename ="src/recursos/sintomas.txt";
         List<String> sintomas=new LinkedList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(filename))){
             String linea;
