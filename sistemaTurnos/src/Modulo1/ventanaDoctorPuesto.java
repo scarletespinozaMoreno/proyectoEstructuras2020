@@ -11,12 +11,12 @@ import javafx.scene.layout.BorderPane;
  *
  * @author scarlet Espinoza
  */
-public class ventanaAtencion {
-     private BorderPane rootAtencion;
+public class ventanaDoctorPuesto {
+    private BorderPane rootDoctor;
 
    
     
-    public ventanaAtencion() throws InterruptedException {
+    public ventanaDoctorPuesto() throws InterruptedException {
         OrganizarVentana();
     }
     
@@ -24,20 +24,19 @@ public class ventanaAtencion {
     
 
     public void OrganizarVentana() throws InterruptedException{
-        rootAtencion=new BorderPane();
-        rootAtencion.setStyle("-fx-background-color: #FFFFFF;");
+        rootDoctor=new BorderPane();
+        rootDoctor.setStyle("-fx-background-color: #FFFFFF;");
         
         
  
     }
 
-    public BorderPane getRootAtencion() {
-        return rootAtencion;
+    public BorderPane getRootDoctor() {
+        return rootDoctor;
     }
 
-    public void setRootAtencion(BorderPane rootAtencion) {
-        this.rootAtencion = rootAtencion;
+    public void setRootDoctor(BorderPane rootDoctor) {
+        this.rootDoctor = rootDoctor;
     }
     
-     
 }

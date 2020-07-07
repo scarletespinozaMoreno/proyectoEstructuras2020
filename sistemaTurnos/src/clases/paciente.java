@@ -10,69 +10,102 @@ package clases;
  * @author scarlet Espinoza
  */
 public class paciente {
-    private int idRegistro;
-    private String nombrePaciente;
-    private String apellidoPaciente;
-    private int edadPaciente;
-    private String generoPaciente;
-    private sintoma sintomaPaciente;
+    private String nombre;
+    private String apellido;
+    private int edad;
+    private String genero;
+    private String sintoma;
+    private int nivelPrioridad;
+    private String diagnostico;
+    private String letra;
 
-    public paciente(String nombrePaciente, String apellidoPaciente, int edadPaciente, String generoPaciente, sintoma sintomaPaciente) {
-       this.idRegistro = this.hashCode();
-        this.nombrePaciente = nombrePaciente;
-        this.apellidoPaciente = apellidoPaciente;
-        this.edadPaciente = edadPaciente;
-        this.generoPaciente = generoPaciente;
-        this.sintomaPaciente = sintomaPaciente;
+    public String getDiagnostico() {
+        return diagnostico;
     }
 
-    public int getIdRegistro() {
-        return idRegistro;
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
-    public void setIdRegistro(int idRegistro) {
-        this.idRegistro = idRegistro;
+    public paciente(String nombre, String apellido,String genero,int edad, String sintoma,int nivel,String letra) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.genero = genero;
+        this.sintoma = sintoma;
+        this.nivelPrioridad =nivel;
+        this.letra=letra;
+    }
+    public paciente(String nombre,String apellido,String genero,String sintoma){
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.genero=genero;
+        this.sintoma=sintoma;
     }
 
-    public String getNombrePaciente() {
-        return nombrePaciente;
+    public int getNivelPrioridad() {
+        return nivelPrioridad;
     }
 
-    public void setNombrePaciente(String nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
+    public void setNivelPrioridad(int nivelPrioridad) {
+        this.nivelPrioridad = nivelPrioridad;
     }
 
-    public String getApellidoPaciente() {
-        return apellidoPaciente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setApellidoPaciente(String apellidoPaciente) {
-        this.apellidoPaciente = apellidoPaciente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getEdadPaciente() {
-        return edadPaciente;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEdadPaciente(int edadPaciente) {
-        this.edadPaciente = edadPaciente;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getGeneroPaciente() {
-        return generoPaciente;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setGeneroPaciente(String generoPaciente) {
-        this.generoPaciente = generoPaciente;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public sintoma getSintomaPaciente() {
-        return sintomaPaciente;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setSintomaPaciente(sintoma sintomaPaciente) {
-        this.sintomaPaciente = sintomaPaciente;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
+
+    public String getSintoma() {
+        return sintoma;
+    }
+
+    public void setSintoma(String sintoma) {
+        this.sintoma = sintoma;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public void setLetra(String letra) {
+        this.letra = letra;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", genero=" + genero + ", sintoma=" + sintoma + ", nivelPrioridad=" + nivelPrioridad + '}';
+    }
+    
     
     
 }

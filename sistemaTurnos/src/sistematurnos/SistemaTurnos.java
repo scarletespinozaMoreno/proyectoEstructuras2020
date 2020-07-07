@@ -5,10 +5,7 @@
  */
 package sistematurnos;
 
-import Modulo1.ventanaAtencion;
-import Modulo1.VentanaFormularioDoctor;
 import Modulo1.PantallaPrincipal;
-import Modulo1.ventanaPuesto;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
@@ -31,7 +28,7 @@ public class SistemaTurnos extends Application {
         Scene sc=new Scene(Pantalla.getRoot());
         ventana.setScene(sc);
         ventana.setWidth(700);
-        ventana.setHeight(500);
+        ventana.setHeight(550);
         ventana.show();
         
         ventana.setOnCloseRequest(e->{

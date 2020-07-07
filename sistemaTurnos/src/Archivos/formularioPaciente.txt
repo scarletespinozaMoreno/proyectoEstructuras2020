@@ -1,0 +1,3 @@
+Scarlet,Espinoza,Femenino,22,fiebre
+daniel,Fabre,Masculino,24,congestión nasal
+Andres,Garcia,Masculino,30,fiebre

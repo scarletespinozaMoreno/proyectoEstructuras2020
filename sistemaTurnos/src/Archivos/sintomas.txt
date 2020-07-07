@@ -1,0 +1,4 @@
+vómito|1|B
+fiebre|0|A
+resfrio|3|D
+congestión nasal|2|C

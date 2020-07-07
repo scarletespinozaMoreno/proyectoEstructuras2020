@@ -8,9 +8,11 @@ package Modulo1;
 
 import ListaCircularDoble.ListaCircularDoble;
 import clases.LecturaEscritura;
+import clases.turno;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ListIterator;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -41,6 +43,8 @@ public class PantallaPrincipal {
     private Button btnAcceder = new Button ("Acceder");
     private ListIterator<String> iterador;
     private MediaView reproductorVideos;
+     private final secciones pantallas = new secciones();
+     static final PriorityQueue<turno> TURNO = new PriorityQueue<>((turno t1, turno t2)-> t1.getTipo()-t2.getTipo());
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -55,7 +59,7 @@ public class PantallaPrincipal {
         root.setCenter(crearCenter());
         root.setLeft(crearLeft());
         root.setStyle("-fx-background-color: #FFFFFF;");
-        
+        //TURNO.addAll(turno.asignarTurnos());
         
         Thread t1=new Thread(new tiempo());
         t1.start();
@@ -73,6 +77,34 @@ public class PantallaPrincipal {
         botones.setPadding(new Insets(10,10,10,10));
         Button atenderTurno=new Button("Atender turno");
         botones.getChildren().addAll(crearPaciente,puestoMedico,atenderTurno);
+        crearPaciente.setOnAction((e)-> {
+            try {
+                pantallas.pantallaPaciente();
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+       });
+        
+        
+        puestoMedico.setOnAction((e)->{
+            try {
+                pantallas.pantallaMedico();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+        });
+        
+        atenderTurno.setOnAction((e)->{
+            try {
+                pantallas.pantallaAtencion();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
         tiempo=new Label("");
         tiempo.setFont(new Font("Arial Black",25));
         arriba.getChildren().add(tiempo);
@@ -161,6 +193,7 @@ public class PantallaPrincipal {
         botones.setAlignment(Pos.CENTER);
         botones.setPadding(new Insets(5,5,5,5));
         botones.setSpacing(20);
+        /*
         Button siguiente=new Button(">>");
         siguiente.setOnAction((e)->{
             reproductorVideos.getMediaPlayer().stop();
@@ -181,7 +214,7 @@ public class PantallaPrincipal {
             reproductorVideos.setMediaPlayer(ant);
         });
         botones.getChildren().addAll(anterior,siguiente);
-        
+        */
         izquierda.getChildren().addAll(reproductorVideos,botones);
         
         
