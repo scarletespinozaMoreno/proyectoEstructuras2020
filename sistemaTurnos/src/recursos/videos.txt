@@ -1,1 +1,2 @@
-src/recursos/programa.mp4
+src/recursos/chiste.mp4
+src/recursos/broma2.mp4
