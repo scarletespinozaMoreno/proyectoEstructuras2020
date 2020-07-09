@@ -8,9 +8,12 @@ package Modulo1;
 
 import ListaCircularDoble.ListaCircularDoble;
 import clases.LecturaEscritura;
+import clases.Medico;
+import clases.puesto;
 import clases.turno;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -43,8 +46,11 @@ public class PantallaPrincipal {
     private Button btnAcceder = new Button ("Acceder");
     private ListIterator<String> iterador;
     private MediaView reproductorVideos;
+    static Label mostrarTurno;
+    static Label mostrarPuesto;
      private final secciones pantallas = new secciones();
      static final PriorityQueue<turno> TURNO = new PriorityQueue<>((turno t1, turno t2)-> t1.getTipo()-t2.getTipo());
+    static final LinkedList<puesto> PUESTO_MEDICO = new LinkedList<>();
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -53,14 +59,16 @@ public class PantallaPrincipal {
     
 
     public void OrganizarVentana() throws InterruptedException{
+        TURNO.addAll(turno.asignarTurnos());
+        puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino",50),"01");
+        PUESTO_MEDICO.add(p);
         root=new BorderPane();
         root.setTop(crearTop());
         root.setBottom(crearButton());
         root.setCenter(crearCenter());
         root.setLeft(crearLeft());
         root.setStyle("-fx-background-color: #FFFFFF;");
-        //TURNO.addAll(turno.asignarTurnos());
-        
+       
         Thread t1=new Thread(new tiempo());
         t1.start();
     }
@@ -150,8 +158,15 @@ public class PantallaPrincipal {
         cuadro2Turno.setPrefWidth(120);
         cuadro2Turno.setAlignment(Pos.CENTER);
         cuadro2Turno.setStyle("-fx-background-color:#87CEFA");
+        
+        mostrarTurno=new Label("");
+        if (!TURNO.isEmpty())
+            mostrarTurno.setText(TURNO.peek().getPaciente().getLetra()+
+                    String.valueOf(TURNO.peek().getNumero()));
+        cuadro2Turno.getChildren().add(mostrarTurno);
         turno.getChildren().addAll(cuadro1Titulo,cuadro2Turno);
         
+       
         VBox puesto=new VBox();
         puesto.setSpacing(5);
         
@@ -170,8 +185,13 @@ public class PantallaPrincipal {
         encabezado2.setFont(new Font("Arial Black",22));
         
         cuadro3Titulo.getChildren().add(encabezado2);
-        puesto.getChildren().addAll(cuadro3Titulo,cuadro4Puesto);
+       
         
+        mostrarPuesto=new Label("");
+        puesto p=PUESTO_MEDICO.peek();
+        mostrarPuesto.setText(p.getNombrePuesto());
+        cuadro4Puesto.getChildren().add(mostrarPuesto);
+        puesto.getChildren().addAll(cuadro3Titulo,cuadro4Puesto);
         derecha.getChildren().addAll(turno,puesto);
         
          return derecha;

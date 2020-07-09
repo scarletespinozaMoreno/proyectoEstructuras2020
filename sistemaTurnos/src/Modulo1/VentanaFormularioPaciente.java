@@ -7,6 +7,8 @@ package Modulo1;
 
 import java.util.List;
 import clases.LecturaEscritura;
+import static clases.LecturaEscritura.leerSintomas;
+import clases.paciente;
 import clases.turno;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -109,13 +111,13 @@ public class VentanaFormularioPaciente {
             output.newLine();
             mensaje.setTextFill(Color.RED);
             mensaje.setText("Registrado...");
-            /*
+            
             List<String> sint=leerSintomas(String.valueOf(combSintomas.getValue()));
             turnos = new turno(String.valueOf(++num), new paciente(fieldNombre.getText(),fieldApellido.getText(), 
                     fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(String)combSintomas.getValue(),
                     Integer.valueOf(sint.get(0)),sint.get(1)));
             PantallaPrincipal.TURNO.offer(turnos);
-             */
+             
         }catch(IOException e){
             System.out.println(e.getMessage());
         }finally{

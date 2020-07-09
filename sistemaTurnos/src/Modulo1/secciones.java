@@ -34,8 +34,8 @@ public class secciones {
         stagePuesto.setTitle("Registrar Puesto");
         ventanaDoctorPuesto ventanaDoctor = new ventanaDoctorPuesto();
         stagePuesto.setScene(new Scene(ventanaDoctor.getRootDoctor()));
-        stagePuesto.setHeight(500);
-        stagePuesto.setWidth(500);
+        stagePuesto.setHeight(550);
+        stagePuesto.setWidth(590);
         stagePuesto.show();
     }
     
