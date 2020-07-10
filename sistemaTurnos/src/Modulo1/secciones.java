@@ -44,7 +44,7 @@ public class secciones {
         VentanaAdministarPuesto ventanaPuesto = new VentanaAdministarPuesto();
         stagePuesto.setScene(new Scene(ventanaPuesto.getRootAdministrar()));
         stagePuesto.setHeight(550);
-        stagePuesto.setWidth(590);
+        stagePuesto.setWidth(480);
         stagePuesto.show();
     }
     

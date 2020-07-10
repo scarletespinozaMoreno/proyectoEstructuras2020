@@ -96,7 +96,7 @@ public class LecturaEscritura {
             while((linea=br.readLine())!=null){
                 
                 String[] data =linea.split(",");
-                puestos.add(new puesto(new Medico(data[0],data[1],data[2],data[3],data[4]),data[5]));
+                puestos.add(new puesto(new Medico(data[0],data[1],data[2],data[3],data[4]),data[4]));
                 
             }
         } catch (IOException ex) {

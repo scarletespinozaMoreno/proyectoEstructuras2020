@@ -1,1 +1,2 @@
 Scarlet,Espinoza,femenino,23,fiebre
+Eduardo,Moreno,Masculino,28,congestión nasal

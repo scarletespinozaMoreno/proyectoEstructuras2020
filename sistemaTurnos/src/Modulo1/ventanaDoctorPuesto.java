@@ -5,17 +5,13 @@
  */
 package Modulo1;
 
-import static clases.LecturaEscritura.leerSintomas;
-import clases.Medico;
-import clases.paciente;
+
 import clases.puesto;
 import clases.turno;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;

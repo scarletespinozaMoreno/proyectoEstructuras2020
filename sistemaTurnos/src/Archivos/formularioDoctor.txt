@@ -1,2 +1,3 @@
-0922520523,tatiana,Moreno,Femenino,Pediatra
-0989792261,David,Alvarado,Masculino,Nutricionista
+0922520523,Scarlet,Espinoza,Femenino,pediatra
+0922520645,Domenica,Recalde,Femenino,ginecologa
+0923467654,Christian,Freire,Masculino,psicologo

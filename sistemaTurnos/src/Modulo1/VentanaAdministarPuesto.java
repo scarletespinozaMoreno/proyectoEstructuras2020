@@ -9,16 +9,12 @@ import clases.LecturaEscritura;
 import clases.Medico;
 import clases.puesto;
 import clases.turno;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -71,13 +67,13 @@ public class VentanaAdministarPuesto {
     
     public Pane crearLeft(){
           VBox izquierda=new VBox();
-          izquierda.setPadding(new Insets(20,20,20,20)); 
+          izquierda.setPadding(new Insets(20,90,20,20)); 
           HBox CedulaMedico =new HBox();
           HBox NombreMedico =new HBox();
           HBox ApellidoMedico =new HBox();
           HBox PuestoMedico =new HBox();
            HBox ProfesionMedico =new HBox();
-          ProfesionMedico.setSpacing(40);
+          ProfesionMedico.setSpacing(33);
           ProfesionMedico.setPadding(new Insets(10,10,10,10));
           CedulaMedico.setSpacing(40);
           CedulaMedico.setPadding(new Insets(10,10,10,10));
@@ -85,7 +81,7 @@ public class VentanaAdministarPuesto {
           NombreMedico.setPadding(new Insets(10,10,10,10));
           ApellidoMedico.setSpacing(33);
           ApellidoMedico.setPadding(new Insets(10,10,10,10));
-          PuestoMedico.setSpacing(40);
+          PuestoMedico.setSpacing(45);
           PuestoMedico.setPadding(new Insets(10,10,10,10));
           CedulaMedico.setAlignment(Pos.CENTER);
           NombreMedico.setAlignment(Pos.CENTER);
@@ -152,7 +148,7 @@ public class VentanaAdministarPuesto {
              }
           
         });
-         botones.getChildren().addAll(Buscar,Limpiar,Asignar,Eliminar);
+         botones.getChildren().addAll(Buscar,Asignar,Limpiar,Eliminar);
          abajo.getChildren().addAll(botones);
          botones.setSpacing(20);
          botones.setAlignment(Pos.CENTER);
@@ -167,12 +163,17 @@ public class VentanaAdministarPuesto {
     
      public void buttonBuscar() throws FileNotFoundException, IOException{
          ArrayList<Medico> medicos =LecturaEscritura.leerDoctor();
+          ArrayList<puesto> puestos =LecturaEscritura.leerPuesto();
          for(Medico m :medicos){
              System.out.println(m);
              if(m.getCedula().equals(fieldcedula.getText()));
                     fieldnombre.setText(m.getNombre());
                     fieldapellido.setText(m.getApellido());
                     fieldprofesion.setText(m.getProfesion());
+                    for(puesto p : puestos){
+                        if(p.getMedico().getCedula().equals(fieldcedula.getText()))
+                            fieldpuesto.setText(p.getNombrePuesto());
+                    }
                     
                     
         }
@@ -214,8 +215,22 @@ public class VentanaAdministarPuesto {
                     fileOut.close();
          */
      }
+        
      }
-     
+     public void buttonEliminar(){
+            // lo que quiero que intentes es del archivo formularioPuesto al tu primer insertar la cedula y se tellenan todos los textfield quiero que al dar click en eliminar del
+            // archivo formulariopUESTO elimines toda la linea donde esta ese puesto es decir del txt desapareceria ese puesto
+            // no puedes simpkemente asignar null al nombre del puesto sino eliminarlo por completo y cuidado la linea que elimines debe el archivo quedar sin espacios
+            // doy clic en buscar me aprace 0922520645,Domenica,Recalde,ginecologa,03
+            // como ella esta en el 03 y doy click en eliminar toda esa linea desaparecera del archivo y no debe queda espacion vacios
+         
+         
+         
+         
+         
+         
+         
+        }
        public void buttonBorrar(){
         fieldcedula.setText("");
         fieldnombre.setText("");
