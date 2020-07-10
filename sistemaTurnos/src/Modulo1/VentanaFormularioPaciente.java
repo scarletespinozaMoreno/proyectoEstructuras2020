@@ -104,6 +104,7 @@ public class VentanaFormularioPaciente {
         FileWriter fw =null;
         turno turnos;
         try{
+            
             File file = new File("src/Archivos/formularioPaciente.txt");
             output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
             output.write(fieldNombre.getText()+","+fieldApellido.getText()+","+fieldGenero.getText()+","+

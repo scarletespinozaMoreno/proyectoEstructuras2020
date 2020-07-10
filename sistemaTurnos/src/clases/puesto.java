@@ -14,18 +14,16 @@ import java.util.List;
 public class puesto {
      private Medico medico;
     private String nombrePuesto;
-    private String nombre, cedula;
     private List<paciente> pacientes;
     private turno  turno;
     private int contadorPacientes;
     
     public puesto(Medico medico,String nombrePuesto) {
-        this.nombre = medico.getNombre();
-        this.cedula=medico.getCedula();
+       this.medico= medico;
         this.nombrePuesto=nombrePuesto;
     }
 
-
+   
     public String getNombrePuesto() {
         return nombrePuesto;
     }
@@ -33,6 +31,8 @@ public class puesto {
     public void setNombrePuesto(String nombrePuesto) {
         this.nombrePuesto = nombrePuesto;
     }
+
+   
 
     public Medico getMedico() {
         return medico;
@@ -48,8 +48,10 @@ public class puesto {
 
     @Override
     public String toString() {
-        return "Puesto{" + "medico=" + medico + ", nombre=" + nombre + ", cedula=" + cedula + ", turno=" + turno + ", contadorPacientes=" + contadorPacientes + '}';
+        return "puesto{" + "medico=" + medico + ", nombrePuesto=" + nombrePuesto + ", pacientes=" + pacientes + ", turno=" + turno + ", contadorPacientes=" + contadorPacientes + '}';
     }
+
+   
     
     
 }

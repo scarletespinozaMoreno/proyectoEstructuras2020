@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * @author scarlet Espinoza
  */
 public class secciones {
-    static Stage stageRegistrar, stagePuesto,stagePaciente;
+    static Stage stageRegistrar, stageMedico,stagePaciente,stagePuesto;
     
 
     public secciones() {
@@ -30,10 +30,19 @@ public class secciones {
     }
     
     public void pantallaMedico() throws InterruptedException{
-        stagePuesto = new Stage();
-        stagePuesto.setTitle("Registrar Puesto");
+        stageMedico = new Stage();
+        stageMedico.setTitle("Registrar Puesto");
         ventanaDoctorPuesto ventanaDoctor = new ventanaDoctorPuesto();
-        stagePuesto.setScene(new Scene(ventanaDoctor.getRootDoctor()));
+        stageMedico.setScene(new Scene(ventanaDoctor.getRootDoctor()));
+        stageMedico.setHeight(550);
+        stageMedico.setWidth(590);
+        stageMedico.show();
+    }
+     public void pantallaPuesto() throws InterruptedException{
+        stagePuesto = new Stage();
+        stagePuesto.setTitle("asignar/eliminar Puesto");
+        VentanaAdministarPuesto ventanaPuesto = new VentanaAdministarPuesto();
+        stagePuesto.setScene(new Scene(ventanaPuesto.getRootAdministrar()));
         stagePuesto.setHeight(550);
         stagePuesto.setWidth(590);
         stagePuesto.show();

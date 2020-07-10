@@ -15,21 +15,14 @@ public class Medico {
     private String apellido;
     private String Profesion;
     private String genero;
-    private int edad;
+    //private int edad;
     
-    public Medico(String cedula, String nombre,String apellido, String Profesion, String genero, int edad) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.apellido=apellido;
-        this.Profesion = Profesion;
-        this.genero = genero;
-        this.edad = edad;
-        
-    }
-    public Medico(String cedula, String nombre,String apellido,String profesion){
+   
+    public Medico(String cedula, String nombre,String apellido,String genero,String profesion){
         this.cedula=cedula;
         this.nombre=nombre;
         this.apellido=apellido;
+        this.genero=genero;
         this.Profesion=profesion;
         
     }
@@ -66,17 +59,22 @@ public class Medico {
         this.genero = genero;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
+   
 
     @Override
     public String toString() {
-        return "Medico{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", Profesion=" + Profesion + '}';
+        return "Medico{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", Profesion=" + Profesion + ", genero=" + genero + '}';
+    }
+
+    
+
+    
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
     
     

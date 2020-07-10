@@ -5,9 +5,17 @@
  */
 package Modulo1;
 
+import static clases.LecturaEscritura.leerSintomas;
 import clases.Medico;
+import clases.paciente;
 import clases.puesto;
+import clases.turno;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -30,10 +38,10 @@ public class ventanaDoctorPuesto {
     private BorderPane rootDoctor;
     private Label titulo,cedula,apellido,nombre,genero,profesion,puesto,mensaje,cantidadPuesto,texto;
     private TextField fieldNombre,fieldApellido,fieldCedula,fieldGenero,fieldProfesion,fieldPuesto;
-    private Button registrar,limpiar;
+    private Button registrar,limpiar,Administrar,eliminar;
     int contador =0;
     puesto puestoPaciente;
-    
+    private final secciones pantallas = new secciones();
     public ventanaDoctorPuesto() throws InterruptedException {
         OrganizarVentana();
     }
@@ -56,8 +64,9 @@ public class ventanaDoctorPuesto {
         texto=new Label("N°Doctores Asignados: ");
         cantidadPuesto=new Label(String.valueOf(PantallaPrincipal.PUESTO_MEDICO.size()));
         cantidadPuesto.setTextFill(Color.BLACK);
+        
+        
         texto.setTextFill(Color.BLACK);
-         derecha.setAlignment(Pos.CENTER);
          derecha.setSpacing(20);
          texto.setFont(new Font("Arial Black",15));
          cantidadPuesto.setFont(new Font("Arial Black",15));
@@ -67,6 +76,11 @@ public class ventanaDoctorPuesto {
         derecha.getChildren().addAll(texto,cantidadPuesto);
         return derecha;
     }
+    
+     public void buttonasignar() throws IOException, InterruptedException{
+         
+     }
+    
     public Pane crearBottom(){
          HBox botones=new HBox();
          VBox abajo= new VBox();
@@ -88,9 +102,19 @@ public class ventanaDoctorPuesto {
           
         });
          
+         Administrar= new Button("Administrar");
+         Administrar.setOnAction((e)-> {
+            try {
+                pantallas.pantallaPuesto();
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+       });
          botones.setSpacing(20);
          botones.setAlignment(Pos.CENTER);
-         botones.getChildren().addAll(registrar, limpiar);
+         botones.getChildren().addAll(registrar, limpiar,Administrar);
          abajo.setPadding(new Insets(20,20,20,20));
          abajo.setSpacing(20);
          abajo.getChildren().addAll(botones,mensaje);
@@ -99,6 +123,45 @@ public class ventanaDoctorPuesto {
      }
     
      public void buttonRegistarDoctor() throws IOException, InterruptedException{
+          if(fieldNombre.getText().equals("")||fieldApellido.getText().equals("")||fieldGenero.getText().equals("")||fieldProfesion.getText().equals("")||fieldCedula.getText().equals("")){
+            mensaje.setStyle("-fx-text-fill:#2E86C1");
+            mensaje.setText("Existen campos en blanco!!!");
+            return;
+        }
+        BufferedWriter output=null;
+        FileWriter fw =null;
+        turno turnos;
+        try{
+            File file = new File("src/Archivos/formularioDoctor.txt");
+            output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
+            output.write(fieldCedula.getText()+","+fieldNombre.getText()+","+fieldApellido.getText()+","+
+                    fieldGenero.getText()+","+fieldProfesion.getText());
+            output.newLine();
+            mensaje.setTextFill(Color.RED);
+            mensaje.setText("Registrado...");
+            
+            /*
+            File file = new File("src/Archivos/formularioDoctor.txt");
+            output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
+            output.write(fieldCedula.getText()+","+fieldNombre.getText()+","+fieldApellido.getText()+","+
+                    fieldGenero.getText()+","+fieldProfesion.getText()+","+"SinAsignar");
+            output.newLine();
+            mensaje.setTextFill(Color.RED);
+            mensaje.setText("Registrado...");
+             */
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(output!=null)
+                    output.close();
+                if(fw!=null)
+                    fw.close();
+            }catch(IOException e){
+                e.getMessage();
+            }
+        }
+         /*
         if(fieldNombre.getText().equals("")||fieldApellido.getText().equals("")||fieldGenero.getText().equals("")||fieldProfesion.getText().equals("")||fieldCedula.getText().equals("")||fieldPuesto.getText().equals("")){
             mensaje.setStyle("-fx-text-fill:#2E86C1");
             mensaje.setText("Existen campos en blanco!!!");
@@ -110,24 +173,21 @@ public class ventanaDoctorPuesto {
             mensaje.setTextFill(Color.RED);
             mensaje.setText("Registro completo");
        }
-         
+         */
     }
     
     
     
     public void buttonBorrar(){
+         
         fieldNombre.setText("");
         fieldApellido.setText("");
-        fieldProfesion.setText("");
-        fieldGenero.setText("");
         fieldCedula.setText("");
-        fieldPuesto.setText("");
+        fieldGenero.setText("");
+        fieldProfesion.setText(" ");
+        
     }
-     
-    
-    
-    
-    
+  
     public Pane crearTop(){
          VBox arriba=new VBox();
          arriba.setPadding(new Insets(25,20,20,20));
@@ -187,7 +247,7 @@ public class ventanaDoctorPuesto {
           hBoxGenero.getChildren().addAll(genero,fieldGenero);
           hBoxGenero.setSpacing(33);
           hBoxGenero.setAlignment(Pos.CENTER);
-          
+          /*
           HBox hBoxPuesto = new HBox();
           puesto = new Label("Puesto:");
           fieldPuesto = new TextField();
@@ -195,9 +255,9 @@ public class ventanaDoctorPuesto {
           hBoxPuesto.getChildren().addAll(puesto,fieldPuesto);
           hBoxPuesto.setSpacing(35);
           hBoxPuesto.setAlignment(Pos.CENTER);
+          */
           
-          
-          izquierda.getChildren().addAll(hBoxCedula,hBoxNombre,hBoxApellido,hBoxGenero,hBoxProfesion,hBoxPuesto);
+          izquierda.getChildren().addAll(hBoxCedula,hBoxNombre,hBoxApellido,hBoxGenero,hBoxProfesion);
           return izquierda;
           
     }

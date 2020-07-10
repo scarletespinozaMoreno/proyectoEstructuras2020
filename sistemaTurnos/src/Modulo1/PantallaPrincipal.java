@@ -60,7 +60,7 @@ public class PantallaPrincipal {
 
     public void OrganizarVentana() throws InterruptedException{
         TURNO.addAll(turno.asignarTurnos());
-        puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino",50),"01");
+        puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino"),"01");
         PUESTO_MEDICO.add(p);
         root=new BorderPane();
         root.setTop(crearTop());
