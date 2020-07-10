@@ -15,7 +15,7 @@ public class Medico {
     private String apellido;
     private String Profesion;
     private String genero;
-    //private int edad;
+
     
    
     public Medico(String cedula, String nombre,String apellido,String genero,String profesion){

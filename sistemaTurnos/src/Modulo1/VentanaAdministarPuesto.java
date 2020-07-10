@@ -41,7 +41,7 @@ public class VentanaAdministarPuesto {
     private BorderPane rootAdministrar;
     private Label titulo,cedula,nombre,apellido,puesto,texto,profesion;
     private TextField fieldtitulo,fieldcedula,fieldnombre,fieldapellido,fieldpuesto,fieldprofesion;
-    private Button Buscar,Asignar,eliminar;
+    private Button Buscar,Asignar,Eliminar,Limpiar;
     public VentanaAdministarPuesto() throws InterruptedException {
         OrganizarVentana();
     }
@@ -127,7 +127,21 @@ public class VentanaAdministarPuesto {
              }
           
         });
-         Asignar= new Button("Asingar");
+         
+         Limpiar= new Button("Limpiar");
+         Limpiar.setOnAction((e)->{
+         buttonBorrar();
+          
+        });
+        
+         Eliminar= new Button("Eliminar");
+         Eliminar.setOnAction((e)->{
+        // buttonBorrar();
+          
+        });
+         
+         
+         Asignar= new Button("Asignar");
          Asignar.setOnAction((e)->{
              try {
                  buttonAsignar();
@@ -138,7 +152,7 @@ public class VentanaAdministarPuesto {
              }
           
         });
-         botones.getChildren().addAll(Buscar,Asignar);
+         botones.getChildren().addAll(Buscar,Limpiar,Asignar,Eliminar);
          abajo.getChildren().addAll(botones);
          botones.setSpacing(20);
          botones.setAlignment(Pos.CENTER);
@@ -185,6 +199,7 @@ public class VentanaAdministarPuesto {
             }catch(IOException e){
                 e.getMessage();
             }
+            
             /*
          BufferedReader file = new BufferedReader(new FileReader("src/Archivos/formularioPuesto.txt"));
                     String line;String input = "";
@@ -200,6 +215,15 @@ public class VentanaAdministarPuesto {
          */
      }
      }
+     
+       public void buttonBorrar(){
+        fieldcedula.setText("");
+        fieldnombre.setText("");
+        fieldapellido.setText("");
+        fieldpuesto.setText("");
+        fieldprofesion.setText("");
+        
+    }
 
     public Pane getRootAdministrar() {
         return rootAdministrar;
