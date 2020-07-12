@@ -164,6 +164,7 @@ public class VentanaAdministarPuesto {
      public void buttonBuscar() throws FileNotFoundException, IOException{
          ArrayList<Medico> medicos =LecturaEscritura.leerDoctor();
           ArrayList<puesto> puestos =LecturaEscritura.leerPuesto();
+          /*
          for(Medico m :medicos){
              System.out.println(m);
              if(m.getCedula().equals(fieldcedula.getText())){
@@ -178,6 +179,7 @@ public class VentanaAdministarPuesto {
                     
                     
         }
+          */
     }
      public void buttonAsignar()throws FileNotFoundException, IOException{
          BufferedWriter output=null;

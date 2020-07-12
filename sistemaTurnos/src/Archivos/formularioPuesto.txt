@@ -1,4 +1,2 @@
 0922520523,Scarlet,Espinoza,pediatra,02
-0922520645,Domenica,Recalde,ginecologa,03
-0923467654,Christian,Freire,psicologo,04
-
+0912345678,Adrian,Mejias,Oftalmologo,03
