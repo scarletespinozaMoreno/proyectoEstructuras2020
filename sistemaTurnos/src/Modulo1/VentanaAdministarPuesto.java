@@ -178,9 +178,7 @@ public class VentanaAdministarPuesto {
           for(puesto p : puestos){
                         if(p.getMedico().getCedula().equals(fieldcedula.getText()))
                             fieldpuesto.setText(p.getNombrePuesto());
-                    }
-                    
-                    
+                    }           
         }
           
     }

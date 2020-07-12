@@ -13,6 +13,7 @@ import clases.puesto;
 import clases.turno;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
@@ -51,6 +52,7 @@ public class PantallaPrincipal {
      private final secciones pantallas = new secciones();
      static final PriorityQueue<turno> TURNO = new PriorityQueue<>((turno t1, turno t2)-> t1.getTipo()-t2.getTipo());
     static final LinkedList<puesto> PUESTO_MEDICO = new LinkedList<>();
+    static final ArrayList<puesto> PUESTO=new ArrayList<>();
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
     }
@@ -60,8 +62,9 @@ public class PantallaPrincipal {
 
     public void OrganizarVentana() throws InterruptedException{
         TURNO.addAll(turno.asignarTurnos());
-        puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino"),"01");
-        PUESTO_MEDICO.add(p);
+        //puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino"),"01");
+        PUESTO.addAll(LecturaEscritura.leerPuesto());
+        PUESTO_MEDICO.addAll(PUESTO);
         root=new BorderPane();
         root.setTop(crearTop());
         root.setBottom(crearButton());
