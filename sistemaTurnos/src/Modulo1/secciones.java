@@ -54,8 +54,8 @@ public class secciones {
         stagePaciente.setTitle("Atencion");
         ventanaAtencion ventanaA = new ventanaAtencion();
         stagePaciente.setScene(new Scene(ventanaA.getRootAtencion()));
-        stagePaciente.setHeight(500);
-        stagePaciente.setWidth(650);
+        stagePaciente.setHeight(550);
+        stagePaciente.setWidth(700);
         stagePaciente.show();
     }
 }

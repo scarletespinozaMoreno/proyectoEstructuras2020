@@ -5,6 +5,14 @@
  */
 package Modulo1;
 
+import static Modulo1.PantallaPrincipal.PUESTO_MEDICO;
+import static Modulo1.PantallaPrincipal.mostrarPuesto;
+import clases.puesto;
+import clases.turno;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,15 +32,16 @@ import javafx.scene.text.Font;
  */
 public class ventanaAtencion {
     private BorderPane rootAtencion;
-    private Label titulo,diagnostico,receta,nom,ape,e;
-    private TextField fieldNombre,fieldApellido,fieldEdad;
+    private Label titulo,diagnostico,receta,nom,ape,e,mensajeError,nomdoctor,apedoctor;
+    private TextField fieldNombre,fieldApellido,fieldEdad,fieldNombreMedico,fieldApellidoMedico;
     private TextArea areaDiagnostico,areaReceta;
-    private Button registrar;
+    private Button atender;
 
    
     
     public ventanaAtencion() throws InterruptedException {
         OrganizarVentana();
+        
     }
     
     
@@ -53,35 +62,53 @@ public class ventanaAtencion {
          VBox arriba=new VBox();
          arriba.setPadding(new Insets(25,20,20,20));
          arriba.setAlignment(Pos.CENTER);
-         titulo = new Label("Atencion cliente");
+         titulo = new Label("Atencion paciente");
          titulo.setFont(new Font("Arial Black",19));
          titulo.setTextFill(Color.web("#2E86C1"));
-         
+         titulo.setPadding(new Insets(13,13,13,13));
          
           HBox hBoxNombre = new HBox();
           nom = new Label("Nombre:");
           fieldNombre = new TextField();
-          hBoxNombre.getChildren().addAll(nom,fieldNombre);
-          hBoxNombre.setSpacing(15);
+          nomdoctor = new Label("Nombre Medico:");
+          fieldNombreMedico = new TextField();
+          hBoxNombre.getChildren().addAll(nom,fieldNombre,nomdoctor,fieldNombreMedico);
+          hBoxNombre.setSpacing(20);
           hBoxNombre.setPadding(new Insets(9,9,9,9));
           hBoxNombre.setAlignment(Pos.TOP_LEFT);
+          
+          
+         
+          
           
           HBox hBoxApellido = new HBox();
           ape = new Label("Apellido:");
           fieldApellido = new TextField();
-          hBoxApellido.getChildren().addAll(ape,fieldApellido);
-           hBoxApellido.setPadding(new Insets(9,9,9,9));
-          hBoxApellido.setSpacing(15);
+          apedoctor = new Label("Apellido Medico:");
+          fieldApellidoMedico = new TextField();
+          hBoxApellido.getChildren().addAll(ape,fieldApellido,apedoctor,fieldApellidoMedico);
+           hBoxApellido.setPadding(new Insets(10,10,10,10));
+          hBoxApellido.setSpacing(20);
           hBoxApellido.setAlignment(Pos.TOP_LEFT);
           
           HBox hBoxEdad = new HBox();
           e = new Label("Edad:");
           fieldEdad = new TextField();
-          hBoxEdad.setPadding(new Insets(9,9,9,9));
+          hBoxEdad.setPadding(new Insets(17,17,17,17));
           hBoxEdad.getChildren().addAll(e,fieldEdad);
           hBoxEdad.setSpacing(35);
           hBoxEdad.setAlignment(Pos.TOP_LEFT);
-          
+          fieldNombre.setText(PantallaPrincipal.TURNO.peek().getPaciente().getNombre());
+          fieldApellido.setText(PantallaPrincipal.TURNO.peek().getPaciente().getApellido());
+          fieldEdad.setText(String.valueOf(PantallaPrincipal.TURNO.peek().getPaciente().getEdad()));
+          puesto p=PUESTO_MEDICO.peek();
+          fieldNombreMedico.setText(p.getMedico().getNombre());
+           fieldApellidoMedico.setText(p.getMedico().getApellido());
+           fieldNombre.setEditable(false);
+          fieldApellido.setEditable(false);
+          fieldEdad.setEditable(false);
+          fieldNombreMedico.setEditable(false);
+          fieldApellidoMedico.setEditable(false);
           arriba.getChildren().addAll(titulo,hBoxNombre,hBoxApellido,hBoxEdad);
           return arriba;
          
@@ -111,14 +138,55 @@ public class ventanaAtencion {
      }
       public Pane crearBottom(){
           HBox b = new HBox();
-          registrar = new Button("Atender");
+          mensajeError= new Label("");
+          atender = new Button("Atender");
+          atender.setOnAction((ActionEvent e)->{
+             try {
+                 buttonAtenderPaciente();
+             } catch (InterruptedException ex) {
+                  Logger.getLogger(ventanaAtencion.class.getName()).log(Level.SEVERE, null, ex);
+              }
+          
+        });
           b.setPadding(new Insets(10,10,10,10));
           b.setAlignment(Pos.TOP_RIGHT);
-          b.getChildren().add(registrar);
+          b.setSpacing(25);
+          b.getChildren().addAll(mensajeError,atender);
           return b;
           
       }
-    public BorderPane getRootAtencion() {
+      
+      public void buttonAtenderPaciente()throws InterruptedException{
+          secciones pantalla=new secciones();
+      
+           if (areaDiagnostico.getText().isEmpty()|| areaReceta.getText().isEmpty())
+            mensajeError.setText("Debe dar un diagnostico y su receta correspondiente");
+           else if(!PantallaPrincipal.TURNO.isEmpty()){
+            // se extrae el turno que sera atendido
+            turno t=PantallaPrincipal.TURNO.poll();
+            t.getPaciente().setDiagnostico(diagnostico.getText());
+            if (PantallaPrincipal.TURNO.isEmpty()){
+                PantallaPrincipal.mensaje.setText("Turnos Atendidos");
+                PantallaPrincipal.mostrarTurno.setText("---");
+                secciones.stagePaciente.close();
+                pantalla.pantallaPaciente();
+                
+            }else{
+                //se muestra el proximo turno a atender en pantalla
+                PantallaPrincipal.mostrarTurno.setText(String.valueOf(PantallaPrincipal.TURNO.peek().
+                        getPaciente().getLetra()+PantallaPrincipal.TURNO.peek().getNumero()));
+            PantallaPrincipal.mostrarPuesto.setText(PantallaPrincipal.PUESTO_MEDICO.peek().getNombrePuesto());
+             
+            puesto p=PantallaPrincipal.PUESTO_MEDICO.poll();
+           // 
+            mensajeError.setTextFill(Color.GREEN);
+            PantallaPrincipal.PUESTO_MEDICO.offer(p);
+            
+            secciones.stagePaciente.close();
+            }
+      }}
+      
+    public Pane getRootAtencion() {
         return rootAtencion;
     }
 

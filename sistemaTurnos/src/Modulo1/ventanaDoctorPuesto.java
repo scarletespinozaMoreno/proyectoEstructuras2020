@@ -142,8 +142,8 @@ public class ventanaDoctorPuesto {
             output.write(fieldCedula.getText()+","+fieldNombre.getText()+","+fieldApellido.getText()+","+
                     fieldGenero.getText()+","+fieldProfesion.getText()+","+"SinAsignar");
             output.newLine();
-            mensaje.setTextFill(Color.RED);
-            mensaje.setText("Registrado...");
+            mensaje2.setTextFill(Color.RED);
+            mensaje2.setText("Registrado...");
              */
         }catch(IOException e){
             System.out.println(e.getMessage());
@@ -159,15 +159,15 @@ public class ventanaDoctorPuesto {
         }
          /*
         if(fieldNombre.getText().equals("")||fieldApellido.getText().equals("")||fieldGenero.getText().equals("")||fieldProfesion.getText().equals("")||fieldCedula.getText().equals("")||fieldPuesto.getText().equals("")){
-            mensaje.setStyle("-fx-text-fill:#2E86C1");
-            mensaje.setText("Existen campos en blanco!!!");
+            mensaje2.setStyle("-fx-text-fill:#2E86C1");
+            mensaje2.setText("Existen campos en blanco!!!");
             return;
         } else{
            PantallaPrincipal.PUESTO_MEDICO.add(new puesto(new Medico(fieldCedula.getText(),fieldNombre.getText(),fieldApellido.getText(),fieldProfesion.getText()),fieldPuesto.getText()));
             contador++;
             this.cantidadPuesto.setText(String.valueOf(PantallaPrincipal.PUESTO_MEDICO.size()));
-            mensaje.setTextFill(Color.RED);
-            mensaje.setText("Registro completo");
+            mensaje2.setTextFill(Color.RED);
+            mensaje2.setText("Registro completo");
        }
          */
     }

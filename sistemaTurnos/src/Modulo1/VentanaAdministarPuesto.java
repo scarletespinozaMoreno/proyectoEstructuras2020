@@ -222,31 +222,31 @@ public class VentanaAdministarPuesto {
         
      }
      public void buttonEliminar(){
-   File inputFile = new File("src/Archivos/formularioPuesto.txt");
-   File outputFile = new File("src/Archivos/formularioPuesto2.txt");
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-      BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+                File inputFile = new File("src/Archivos/formularioPuesto.txt");
+                File outputFile = new File("src/Archivos/formularioPuesto2.txt");
+                 try {
+                   BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+                   BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 
-    String currentLine;
-    while((currentLine=reader.readLine())!= null){
-        System.out.println(currentLine);        
-        String[] data =currentLine.split(",");   
-                if((data[4].equals(fieldpuesto.getText()))){
-                    continue;
-                }else{
-                writer.write(currentLine + System.getProperty("line.separator"));}
-            }
-    writer.close();
-    reader.close();
-    String nombre=outputFile.getName();
-        System.out.println(nombre);
-    inputFile.delete();
-    outputFile.renameTo(new File("src/Archivos/formularioPuesto.txt"));
+                 String currentLine;
+                 while((currentLine=reader.readLine())!= null){
+                     System.out.println(currentLine);        
+                     String[] data =currentLine.split(",");   
+                             if((data[4].equals(fieldpuesto.getText()))){
+                                 continue;
+                             }else{
+                             writer.write(currentLine + System.getProperty("line.separator"));}
+                         }
+                 writer.close();
+                 reader.close();
+                 String nombre=outputFile.getName();
+                     System.out.println(nombre);
+                 inputFile.delete();
+                 outputFile.renameTo(new File("src/Archivos/formularioPuesto.txt"));
 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }  
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }  
         }
      
        public void buttonBorrar(){

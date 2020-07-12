@@ -125,16 +125,16 @@ public class PantallaPrincipal {
        }
     
     public Pane crearButton(){
-        HBox abajo = new HBox();
+        VBox abajo = new VBox();
         abajo.setAlignment(Pos.CENTER);
         abajo.setPadding(new Insets(10,10,10,10));
-        Label vacio = new Label("  ");
+        mensaje = new Label(" ");
         
         Label Mensaje= new Label("Horario de atención de Lunes a Viernes de 10 a 18 Hs/ Sabado y Domingos" + " de 9 a 14 hs");
         Mensaje.setStyle("-fx-background-color:#2E86C1");
         Mensaje.setFont(new Font("Arial Black",12.7));
         Mensaje.setTextFill(Color.web("#FFFFFF"));
-        abajo.getChildren().add(Mensaje);
+        abajo.getChildren().addAll(mensaje,Mensaje);
         return abajo; 
     }
     
