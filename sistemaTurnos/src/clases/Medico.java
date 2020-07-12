@@ -26,6 +26,13 @@ public class Medico {
         this.Profesion=profesion;
         
     }
+     public Medico(String cedula, String nombre,String apellido,String profesion){
+        this.cedula=cedula;
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.Profesion=profesion;
+        
+    }
 
     public String getCedula() {
         return cedula;

@@ -40,6 +40,7 @@ public class VentanaAdministarPuesto {
     private Label titulo,cedula,nombre,apellido,puesto,texto,profesion;
     private TextField fieldtitulo,fieldcedula,fieldnombre,fieldapellido,fieldpuesto,fieldprofesion;
     private Button Buscar,Asignar,Eliminar,Limpiar;
+    int num =0;
     public VentanaAdministarPuesto() throws InterruptedException {
         OrganizarVentana();
     }
@@ -185,14 +186,13 @@ public class VentanaAdministarPuesto {
      public void buttonAsignar()throws FileNotFoundException, IOException{
          BufferedWriter output=null;
         FileWriter fw =null;
-        turno turnos;
         try{
             File file = new File("src/Archivos/formularioPuesto.txt");
             output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
             output.write(fieldcedula.getText()+","+fieldnombre.getText()+","+fieldapellido.getText()+","+
                         fieldprofesion.getText()+","+fieldpuesto.getText());
             output.newLine();
-             
+            PantallaPrincipal.PUESTO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
         }catch(IOException e){
             System.out.println(e.getMessage());
         }finally{

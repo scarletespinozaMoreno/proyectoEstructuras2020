@@ -41,7 +41,7 @@ public class VentanaFormularioPaciente {
     private Label titulo,nom,ape,e,ge,mensaje;
     private TextField fieldNombre,fieldApellido,fieldEdad,fieldGenero;
     private Button registrar,limpiar;
-    private ComboBox combSintomas;
+    static ComboBox combSintomas;
     int num =0;
 
    
