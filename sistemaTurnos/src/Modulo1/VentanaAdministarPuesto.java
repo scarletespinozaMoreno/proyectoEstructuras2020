@@ -9,9 +9,11 @@ import clases.LecturaEscritura;
 import clases.Medico;
 import clases.puesto;
 import clases.turno;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -132,7 +134,8 @@ public class VentanaAdministarPuesto {
         
          Eliminar= new Button("Eliminar");
          Eliminar.setOnAction((e)->{
-        // buttonBorrar();
+          buttonEliminar();
+          buttonBorrar();
           
         });
          
@@ -164,8 +167,8 @@ public class VentanaAdministarPuesto {
      public void buttonBuscar() throws FileNotFoundException, IOException{
          ArrayList<Medico> medicos =LecturaEscritura.leerDoctor();
           ArrayList<puesto> puestos =LecturaEscritura.leerPuesto();
-          /*
-         for(Medico m :medicos){
+          
+        for(Medico m :medicos){
              System.out.println(m);
              if(m.getCedula().equals(fieldcedula.getText())){
                     fieldnombre.setText(m.getNombre());
@@ -179,7 +182,7 @@ public class VentanaAdministarPuesto {
                     
                     
         }
-          */
+          
     }
      public void buttonAsignar()throws FileNotFoundException, IOException{
          BufferedWriter output=null;
@@ -221,19 +224,33 @@ public class VentanaAdministarPuesto {
         
      }
      public void buttonEliminar(){
-            // lo que quiero que intentes es del archivo formularioPuesto al tu primer insertar la cedula y se tellenan todos los textfield quiero que al dar click en eliminar del
-            // archivo formulariopUESTO elimines toda la linea donde esta ese puesto es decir del txt desapareceria ese puesto
-            // no puedes simpkemente asignar null al nombre del puesto sino eliminarlo por completo y cuidado la linea que elimines debe el archivo quedar sin espacios
-            // doy clic en buscar me aprace 0922520645,Domenica,Recalde,ginecologa,03
-            // como ella esta en el 03 y doy click en eliminar toda esa linea desaparecera del archivo y no debe queda espacion vacios
-         
-         
-         
-         
-         
-         
-         
+   File inputFile = new File("src/Archivos/formularioPuesto.txt");
+   File outputFile = new File("src/Archivos/formularioPuesto2.txt");
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+
+    String currentLine;
+    while((currentLine=reader.readLine())!= null){
+        System.out.println(currentLine);        
+        String[] data =currentLine.split(",");   
+                if((data[4].equals(fieldpuesto.getText()))){
+                    continue;
+                }else{
+                writer.write(currentLine + System.getProperty("line.separator"));}
+            }
+    writer.close();
+    reader.close();
+    String nombre=outputFile.getName();
+        System.out.println(nombre);
+    inputFile.delete();
+    outputFile.renameTo(new File("src/Archivos/formularioPuesto.txt"));
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }  
         }
+     
        public void buttonBorrar(){
         fieldcedula.setText("");
         fieldnombre.setText("");
