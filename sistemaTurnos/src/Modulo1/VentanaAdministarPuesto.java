@@ -166,11 +166,12 @@ public class VentanaAdministarPuesto {
           ArrayList<puesto> puestos =LecturaEscritura.leerPuesto();
          for(Medico m :medicos){
              System.out.println(m);
-             if(m.getCedula().equals(fieldcedula.getText()));
+             if(m.getCedula().equals(fieldcedula.getText())){
                     fieldnombre.setText(m.getNombre());
                     fieldapellido.setText(m.getApellido());
                     fieldprofesion.setText(m.getProfesion());
-                    for(puesto p : puestos){
+              }
+          for(puesto p : puestos){
                         if(p.getMedico().getCedula().equals(fieldcedula.getText()))
                             fieldpuesto.setText(p.getNombrePuesto());
                     }
