@@ -6,12 +6,15 @@
 package Modulo1;
 
 
+import clases.LecturaEscritura;
+import clases.Medico;
 import clases.puesto;
 import clases.turno;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -124,6 +127,14 @@ public class ventanaDoctorPuesto {
             mensaje.setText("Existen campos en blanco!!!");
             return;
         }
+          ArrayList<Medico> medicos =LecturaEscritura.leerDoctor();
+          for(Medico m:medicos){
+              if(fieldCedula.getText().equals(m.getCedula())){
+                  mensaje.setStyle("-fx-text-fill:#2E86C1");
+                  mensaje.setText("La cedula que trata de ingresar, ya se encuentra registrada");
+                  return;
+              }
+          }
         BufferedWriter output=null;
         FileWriter fw =null;
         turno turnos;
