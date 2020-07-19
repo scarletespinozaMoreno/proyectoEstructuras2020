@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -114,17 +115,34 @@ public class ventanaDoctorPuesto {
          abajo.setAlignment(Pos.CENTER);
          return abajo;
      }
-    
+     private boolean listaContieneDoctor(ArrayList<Medico> medicos,Medico m){
+        ListIterator<Medico> it= medicos.listIterator();
+        while(it.hasNext()){
+             Medico medico = it.next();
+            if(medico.getCedula().equals(m.getCedula())){
+                mensaje.setTextFill(Color.GREEN);
+                mensaje.setText("Doctor ya existente");
+                return true;
+            }
+        }
+        return false;
+    }
      public void buttonRegistarDoctor() throws IOException, InterruptedException{
           if(fieldNombre.getText().equals("")||fieldApellido.getText().equals("")||fieldProfesion.getText().equals("")||fieldCedula.getText().equals("")){
             mensaje.setStyle("-fx-text-fill:#2E86C1");
             mensaje.setText("Existen campos en blanco!!!");
-        }else{
-              PantallaPrincipal.MEDICO.add(new Medico(fieldCedula.getText(),fieldNombre.getText(),fieldApellido.getText(),fieldProfesion.getText()));
-          }
+            
+            }else{
+               Medico m =new Medico(fieldCedula.getText(),fieldNombre.getText(),fieldApellido.getText(),fieldProfesion.getText());
+               if(!listaContieneDoctor(PantallaPrincipal.MEDICO, m)){
+                   PantallaPrincipal.MEDICO.add(new Medico(fieldCedula.getText(),fieldNombre.getText(),fieldApellido.getText(),fieldProfesion.getText()));
+                     mensaje.setTextFill(Color.GREEN);
+                     mensaje.setText("Registro completo");
+               }
+            
           
          }
-    
+      }
     
     public void buttonBorrar(){
          

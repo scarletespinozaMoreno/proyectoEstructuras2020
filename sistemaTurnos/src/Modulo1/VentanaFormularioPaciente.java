@@ -106,8 +106,8 @@ public class VentanaFormularioPaciente {
             paciente =  new paciente(fieldNombre.getText(),fieldApellido.getText(), 
                     fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(sintoma)combSintomas.getValue());
             PantallaPrincipal.PACIENTE.offer(paciente);
-             
-        
+             mensaje.setText("registrado");
+              mensaje.setTextFill(Color.BLACK);
     }
      public void buttonBorrar(){
         fieldNombre.setText("");
