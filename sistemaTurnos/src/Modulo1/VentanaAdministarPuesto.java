@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -36,7 +37,7 @@ import javafx.scene.text.Font;
  */
 public class VentanaAdministarPuesto {
     private BorderPane rootAdministrar;
-    private Label titulo,cedula,nombre,apellido,puesto,texto,profesion;
+    private Label titulo,cedula,nombre,apellido,puesto,texto,profesion,mensaje;
     private TextField fieldtitulo,fieldcedula,fieldnombre,fieldapellido,fieldpuesto,fieldprofesion;
     private Button Buscar,Asignar,Eliminar,Limpiar;
     int num =0;
@@ -114,6 +115,7 @@ public class VentanaAdministarPuesto {
     public Pane crearBottom(){
          HBox botones=new HBox();
          VBox abajo= new VBox();
+          mensaje= new Label("");
          Buscar= new Button("Buscar");
          Buscar.setOnAction((e)->{
              try {
@@ -152,7 +154,7 @@ public class VentanaAdministarPuesto {
           
         });
          botones.getChildren().addAll(Buscar,Asignar,Limpiar,Eliminar);
-         abajo.getChildren().addAll(botones);
+         abajo.getChildren().addAll(botones,mensaje);
          botones.setSpacing(20);
          botones.setAlignment(Pos.CENTER);
          abajo.setPadding(new Insets(20,20,20,20));
@@ -179,48 +181,27 @@ public class VentanaAdministarPuesto {
     }
      public void buttonAsignar()throws FileNotFoundException, IOException{
          
-          PantallaPrincipal.PUESTO_MEDICO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
-         /*
-          BufferedWriter output=null;
-        FileWriter fw =null;
-        try{
-            File file = new File("src/Archivos/formularioPuesto.txt");
-            output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
-            output.write(fieldcedula.getText()+","+fieldnombre.getText()+","+fieldapellido.getText()+","+
-                        fieldprofesion.getText()+","+fieldpuesto.getText());
-            output.newLine();
-            
-           
-            
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(output!=null)
-                    output.close();
-                if(fw!=null)
-                    fw.close();
-            }catch(IOException e){
-                e.getMessage();
-            }
-          */
-            
-            /*
-         BufferedReader file = new BufferedReader(new FileReader("src/Archivos/formularioPuesto.txt"));
-                    String line;String input = "";
-                    while((line = file.readLine()) != null){
-                    if(line.contains(fieldcedula.getText()))
-                    input += line.replace("SinAsignar",fieldpuesto.getText()+"\r\n");
-                    else
-                    input += line+"\r\n";
+         
+          puesto p =new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText());
+               if(!listaContienePuesto(PantallaPrincipal.PUESTO_MEDICO, p)){
+                      PantallaPrincipal.PUESTO_MEDICO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
+                     mensaje.setTextFill(Color.GREEN);
+                     mensaje.setText("Registro completo");
                     }
-                    FileOutputStream fileOut = new FileOutputStream("src/Archivos/formularioPuesto.txt");
-                    fileOut.write(input.getBytes());
-                    fileOut.close();
-         */
-     }
-        
-     
+               
+                }
+    private boolean listaContienePuesto(LinkedList<puesto> puestos,puesto p){
+                ListIterator<puesto> it= puestos.listIterator();
+                while(it.hasNext()){
+                      puesto puesto= it.next();
+                    if(puesto.getNombrePuesto().equals(p.getNombrePuesto())){
+                        mensaje.setTextFill(Color.GREEN);
+                        mensaje.setText("Doctor ya existente");
+                        return true;
+                    }
+                }
+                return false;
+       }
      public void buttonEliminar(){
          Iterator <puesto>it = PUESTO_MEDICO.listIterator();
          while(it.hasNext()){
@@ -229,34 +210,7 @@ public class VentanaAdministarPuesto {
                     PUESTO_MEDICO.remove(p);
              }
          }
-         /*
-                File inputFile = new File("src/Archivos/formularioPuesto.txt");
-                File outputFile = new File("src/Archivos/formularioPuesto2.txt");
-                 try {
-                   BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-                   BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-
-                 String currentLine;
-                 while((currentLine=reader.readLine())!= null){
-                     System.out.println(currentLine);        
-                     String[] data =currentLine.split(",");   
-                             if((data[4].equals(fieldpuesto.getText()))){
-                                 continue;
-                             }else{
-                             writer.write(currentLine + System.getProperty("line.separator"));}
-                         }
-                 writer.close();
-                 reader.close();
-                 String nombre=outputFile.getName();
-                     System.out.println(nombre);
-                 inputFile.delete();
-                 outputFile.renameTo(new File("src/Archivos/formularioPuesto.txt"));
-
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }  
-     */
-
+         
         }
      
        public void buttonBorrar(){
