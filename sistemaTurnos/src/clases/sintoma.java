@@ -12,10 +12,16 @@ package clases;
 public class sintoma {
     private String nombreSintoma;
     private int prioridad;
+    private String letra;
 
-    public sintoma(String nombreSintoma, int prioridad) {
+    public sintoma(String nombreSintoma, int prioridad,String letra) {
         this.nombreSintoma = nombreSintoma;
         this.prioridad = prioridad;
+        this.letra=letra;
+    }
+
+    public String getLetra() {
+        return letra;
     }
 
     public String getNombreSintoma() {
@@ -33,6 +39,12 @@ public class sintoma {
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
+
+    @Override
+    public String toString() {
+        return  nombreSintoma;
+    }
+    
     
     
 }

@@ -5,18 +5,17 @@
  */
 package Modulo1;
 
+
+import static Modulo1.PantallaPrincipal.PUESTO_MEDICO;
 import clases.LecturaEscritura;
 import clases.Medico;
 import clases.puesto;
-import clases.turno;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Insets;
@@ -166,25 +165,23 @@ public class VentanaAdministarPuesto {
     }
     
      public void buttonBuscar() throws FileNotFoundException, IOException{
-         ArrayList<Medico> medicos =LecturaEscritura.leerDoctor();
-          ArrayList<puesto> puestos =LecturaEscritura.leerPuesto();
+         
           
-        for(Medico m :medicos){
+        for(Medico m :PantallaPrincipal.MEDICO){
              System.out.println(m);
              if(m.getCedula().equals(fieldcedula.getText())){
                     fieldnombre.setText(m.getNombre());
                     fieldapellido.setText(m.getApellido());
                     fieldprofesion.setText(m.getProfesion());
               }
-          for(puesto p : puestos){
-                        if(p.getMedico().getCedula().equals(fieldcedula.getText()))
-                            fieldpuesto.setText(p.getNombrePuesto());
-                    }           
-        }
-          
+ 
+         }  
     }
      public void buttonAsignar()throws FileNotFoundException, IOException{
-         BufferedWriter output=null;
+         
+          PantallaPrincipal.PUESTO_MEDICO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
+         /*
+          BufferedWriter output=null;
         FileWriter fw =null;
         try{
             File file = new File("src/Archivos/formularioPuesto.txt");
@@ -192,7 +189,9 @@ public class VentanaAdministarPuesto {
             output.write(fieldcedula.getText()+","+fieldnombre.getText()+","+fieldapellido.getText()+","+
                         fieldprofesion.getText()+","+fieldpuesto.getText());
             output.newLine();
-            PantallaPrincipal.PUESTO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
+            
+           
+            
         }catch(IOException e){
             System.out.println(e.getMessage());
         }finally{
@@ -204,6 +203,7 @@ public class VentanaAdministarPuesto {
             }catch(IOException e){
                 e.getMessage();
             }
+          */
             
             /*
          BufferedReader file = new BufferedReader(new FileReader("src/Archivos/formularioPuesto.txt"));
@@ -220,8 +220,16 @@ public class VentanaAdministarPuesto {
          */
      }
         
-     }
+     
      public void buttonEliminar(){
+         Iterator <puesto>it = PUESTO_MEDICO.listIterator();
+         while(it.hasNext()){
+             puesto p=it.next();
+             if(p.getMedico().getCedula().equals(fieldcedula.getText())){
+                    PUESTO_MEDICO.remove(p);
+             }
+         }
+         /*
                 File inputFile = new File("src/Archivos/formularioPuesto.txt");
                 File outputFile = new File("src/Archivos/formularioPuesto2.txt");
                  try {
@@ -247,6 +255,8 @@ public class VentanaAdministarPuesto {
                  } catch (IOException e) {
                      e.printStackTrace();
                  }  
+     */
+
         }
      
        public void buttonBorrar(){
@@ -257,6 +267,9 @@ public class VentanaAdministarPuesto {
         fieldprofesion.setText("");
         
     }
+    
+        
+    
 
     public Pane getRootAdministrar() {
         return rootAdministrar;

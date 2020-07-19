@@ -5,19 +5,18 @@
  */
 package clases;
 
+import Modulo1.PantallaPrincipal;
+
 /**
  *
  * @author scarlet Espinoza
  */
-public class paciente {
-    private String nombre;
-    private String apellido;
+public class paciente extends Persona{
     private int edad;
-    private String genero;
-    private String sintoma;
-    private int nivelPrioridad;
+    private sintoma sintoma;
     private String diagnostico;
-    private String letra;
+    private turno turno;
+    private String genero;
 
     public String getDiagnostico() {
         return diagnostico;
@@ -28,82 +27,51 @@ public class paciente {
     }
 
     public paciente(String nombre, String apellido,String genero,int edad, String sintoma,int nivel,String letra) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        this.genero = genero;
-        this.sintoma = sintoma;
-        this.nivelPrioridad =nivel;
-        this.letra=letra;
-    }
-    public paciente(String nombre,String apellido,String genero,String sintoma){
-        this.nombre=nombre;
-        this.apellido=apellido;
+        super(nombre,apellido);
+        this.edad=edad;
         this.genero=genero;
-        this.sintoma=sintoma;
+        this.sintoma =new sintoma(sintoma,nivel,letra);
+        turno=new turno(String.valueOf(PantallaPrincipal.generarTurno()));
+    }
+    
+    public paciente(String nombre, String apellido,String genero,int edad, sintoma sintoma) {
+        super(nombre,apellido);
+        this.edad=edad;
+        this.genero=genero;
+        this.sintoma =sintoma;
+        turno=new turno(String.valueOf(PantallaPrincipal.generarTurno()));
     }
 
-    public int getNivelPrioridad() {
-        return nivelPrioridad;
-    }
 
-    public void setNivelPrioridad(int nivelPrioridad) {
-        this.nivelPrioridad = nivelPrioridad;
-    }
 
-    public String getNombre() {
-        return nombre;
+    
+    public String getGenero() {
+        return genero;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    
 
     public int getEdad() {
         return edad;
+    }
+
+    public turno getTurno() {
+        return turno;
     }
 
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
-    public String getGenero() {
-        return genero;
-    }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
 
-    public String getSintoma() {
+    public sintoma getSintoma() {
         return sintoma;
     }
-
-    public void setSintoma(String sintoma) {
-        this.sintoma = sintoma;
-    }
-
-    public String getLetra() {
-        return letra;
-    }
-
-    public void setLetra(String letra) {
-        this.letra = letra;
-    }
-    
     
 
     @Override
     public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", genero=" + genero + ", sintoma=" + sintoma + ", nivelPrioridad=" + nivelPrioridad + '}';
+        return "Cliente{" + "nombre=" + this.getNombre() + ", apellido=" + this.getApellido()+ ", sintoma=" + sintoma +  '}';
     }
     
     

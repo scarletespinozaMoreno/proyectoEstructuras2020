@@ -7,8 +7,8 @@ package Modulo1;
 
 import java.util.List;
 import clases.LecturaEscritura;
-import static clases.LecturaEscritura.leerSintomas;
 import clases.paciente;
+import clases.sintoma;
 import clases.turno;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -100,37 +100,14 @@ public class VentanaFormularioPaciente {
             mensaje.setText("Campos Obligatorios!!");
             return;
         } 
-        BufferedWriter output=null;
-        FileWriter fw =null;
-        turno turnos;
-        try{
+        paciente paciente;
+        //String nombre, String apellido,String genero,int edad, String sintoma,int nivel,String letra
             
-            File file = new File("src/Archivos/formularioPaciente.txt");
-            output = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
-            output.write(fieldNombre.getText()+","+fieldApellido.getText()+","+fieldGenero.getText()+","+
-                    fieldEdad.getText()+","+(String)combSintomas.getValue());
-            output.newLine();
-            mensaje.setTextFill(Color.RED);
-            mensaje.setText("Registrado...");
-            
-            List<String> sint=leerSintomas(String.valueOf(combSintomas.getValue()));
-            turnos = new turno(String.valueOf(++num), new paciente(fieldNombre.getText(),fieldApellido.getText(), 
-                    fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(String)combSintomas.getValue(),
-                    Integer.valueOf(sint.get(0)),sint.get(1)));
-            PantallaPrincipal.TURNO.offer(turnos);
+            paciente =  new paciente(fieldNombre.getText(),fieldApellido.getText(), 
+                    fieldGenero.getText(),Integer.valueOf(fieldEdad.getText()),(sintoma)combSintomas.getValue());
+            PantallaPrincipal.PACIENTE.offer(paciente);
              
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(output!=null)
-                    output.close();
-                if(fw!=null)
-                    fw.close();
-            }catch(IOException e){
-                e.getMessage();
-            }
-        }
+        
     }
      public void buttonBorrar(){
         fieldNombre.setText("");
@@ -156,8 +133,8 @@ public class VentanaFormularioPaciente {
      public Pane crearCenter(){
          VBox derecha=new VBox();
           derecha.setPadding(new Insets(28,20,20,20));
-           List<String> lista= LecturaEscritura.cargarSintomas();
-          combSintomas = new ComboBox(FXCollections.observableArrayList(lista)); 
+           List<sintoma> lista= LecturaEscritura.cargarSintomas();
+          combSintomas = new ComboBox(FXCollections.observableList(lista)); 
           combSintomas.setStyle("-fx-background-color:#87CEFA");
          derecha.getChildren().addAll(combSintomas);
          return derecha;

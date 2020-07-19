@@ -7,6 +7,7 @@ package Modulo1;
 
 import static Modulo1.PantallaPrincipal.PUESTO_MEDICO;
 import static Modulo1.PantallaPrincipal.mostrarPuesto;
+import clases.paciente;
 import clases.puesto;
 import clases.turno;
 
@@ -33,7 +34,7 @@ import javafx.scene.text.Font;
 public class ventanaAtencion {
     private BorderPane rootAtencion;
     private Label titulo,diagnostico,receta,nom,ape,e,mensajeError,nomdoctor,apedoctor;
-    private TextField fieldNombre,fieldApellido,fieldEdad,fieldNombreMedico,fieldApellidoMedico;
+    static TextField fieldNombre,fieldApellido,fieldEdad,fieldNombreMedico,fieldApellidoMedico;
     private TextArea areaDiagnostico,areaReceta;
     private Button atender;
 
@@ -53,8 +54,13 @@ public class ventanaAtencion {
         rootAtencion.setTop(crearTop());
         rootAtencion.setCenter(crearCenter());
         rootAtencion.setBottom(crearBottom());
+        /*
+        while(!PUESTO_MEDICO.isEmpty()){
+                 puesto p = PUESTO_MEDICO.pop();
+                 System.out.println(p.getNombrePuesto());
+             }
         
-        
+        */
  
     }
 
@@ -98,13 +104,16 @@ public class ventanaAtencion {
           hBoxEdad.getChildren().addAll(e,fieldEdad);
           hBoxEdad.setSpacing(35);
           hBoxEdad.setAlignment(Pos.TOP_LEFT);
-          fieldNombre.setText(PantallaPrincipal.TURNO.peek().getPaciente().getNombre());
-          fieldApellido.setText(PantallaPrincipal.TURNO.peek().getPaciente().getApellido());
-          fieldEdad.setText(String.valueOf(PantallaPrincipal.TURNO.peek().getPaciente().getEdad()));
+
+          fieldNombre.setText(PantallaPrincipal.PACIENTE.peek().getNombre());
+          fieldApellido.setText(PantallaPrincipal.PACIENTE.peek().getApellido());
+          fieldEdad.setText(String.valueOf(PantallaPrincipal.PACIENTE.peek().getEdad()));
+          //
           puesto p=PUESTO_MEDICO.peek();
-          fieldNombreMedico.setText(p.getMedico().getNombre());
-           fieldApellidoMedico.setText(p.getMedico().getApellido());
-           fieldNombre.setEditable(false);
+          fieldNombreMedico.setText(String.valueOf(p.getMedico().getNombre()));
+          fieldApellidoMedico.setText(String.valueOf(p.getNombrePuesto()));
+          
+          fieldNombre.setEditable(false);
           fieldApellido.setEditable(false);
           fieldEdad.setEditable(false);
           fieldNombreMedico.setEditable(false);
@@ -161,28 +170,24 @@ public class ventanaAtencion {
       
            if (areaDiagnostico.getText().isEmpty()|| areaReceta.getText().isEmpty())
             mensajeError.setText("Debe dar un diagnostico y su receta correspondiente");
-           else if(!PantallaPrincipal.TURNO.isEmpty()){
+           else if(!PantallaPrincipal.PACIENTE.isEmpty()){
             // se extrae el turno que sera atendido
-            turno t=PantallaPrincipal.TURNO.poll();
-            t.getPaciente().setDiagnostico(diagnostico.getText());
-            if (PantallaPrincipal.TURNO.isEmpty()){
+            paciente t=PantallaPrincipal.PACIENTE.poll();
+            t.setDiagnostico(diagnostico.getText());
+            if (PantallaPrincipal.PACIENTE.isEmpty()){
                 PantallaPrincipal.mensaje.setText("Turnos Atendidos");
                 PantallaPrincipal.mostrarTurno.setText("---");
                 secciones.stagePaciente.close();
-                pantalla.pantallaPaciente();
+                //pantalla.pantallaPaciente();
                 
             }else{
                 //se muestra el proximo turno a atender en pantalla
-                PantallaPrincipal.mostrarTurno.setText(String.valueOf(PantallaPrincipal.TURNO.peek().
-                        getPaciente().getLetra()+PantallaPrincipal.TURNO.peek().getNumero()));
-            PantallaPrincipal.mostrarPuesto.setText(PantallaPrincipal.PUESTO_MEDICO.peek().getNombrePuesto());
-             
-            puesto p=PantallaPrincipal.PUESTO_MEDICO.poll();
-           // 
-            mensajeError.setTextFill(Color.GREEN);
-            PantallaPrincipal.PUESTO_MEDICO.offer(p);
-            
-            secciones.stagePaciente.close();
+                PantallaPrincipal.mostrarTurno.setText(String.valueOf(PantallaPrincipal.PACIENTE.peek().getSintoma().getLetra()+PantallaPrincipal.PACIENTE.peek().getTurno().getNumero()));
+                PantallaPrincipal.mostrarPuesto.setText(PantallaPrincipal.PUESTO_MEDICO.peek().getNombrePuesto());
+                puesto p=PantallaPrincipal.PUESTO_MEDICO.poll();
+                mensajeError.setTextFill(Color.GREEN);
+                PantallaPrincipal.PUESTO_MEDICO.offer(p);
+                secciones.stagePaciente.close();
             }
       }}
       

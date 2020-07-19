@@ -40,14 +40,14 @@ public class LecturaEscritura {
     }
     
     
-    public static  List<String> cargarSintomas(){
-        List<String> lista = new LinkedList<>();
+    public static  List<sintoma> cargarSintomas(){
+        List<sintoma> lista = new LinkedList<>();
         String filename ="src/Archivos/sintomas.txt";
         try(BufferedReader br = new BufferedReader(new FileReader(filename))){
             String linea=null;
             while((linea=br.readLine())!=null){
                 String[] info =linea.split("\\|");
-                lista.add(info[0]);
+                lista.add(new sintoma(info[0],Integer.valueOf(info[1]),info[2]));
             }
             //return lista;
         } catch (IOException ex) {
@@ -63,8 +63,7 @@ public class LecturaEscritura {
             while((linea=br.readLine())!=null){
                 
                 String[] data =linea.split(",");
-                List<String> s=leerSintomas(data[4]);
-                pacientes.add(new paciente(data[0],data[1],data[2],Integer.parseInt(data[3]),data[4],Integer.valueOf(s.get(0)),s.get(1)));
+                pacientes.add(new paciente(data[0],data[1],data[2],Integer.parseInt(data[3]),data[4],Integer.valueOf(data[5]),data[6]));
             }
         } catch (IOException ex) {
             Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,14 +71,14 @@ public class LecturaEscritura {
         return pacientes;
     }
     public static ArrayList<Medico> leerDoctor(){
-        String filename ="src/Archivos/formularioDoctor.txt";
+        String filename ="src/Archivos/doctores.txt";
         ArrayList<Medico> medicos = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(filename))){
             String linea;
             while((linea=br.readLine())!=null){
                 
                 String[] data =linea.split(",");
-                medicos.add(new Medico(data[0],data[1],data[2],data[3],data[4]));
+                medicos.add(new Medico(data[0],data[1],data[2],data[3]));
                 
             }
         } catch (IOException ex) {
@@ -88,41 +87,4 @@ public class LecturaEscritura {
         return medicos;
     }
     
-    public static ArrayList<puesto> leerPuesto(){
-        String filename ="src/Archivos/formularioPuesto.txt";
-        ArrayList<puesto> puestos = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-            String linea;
-            while((linea=br.readLine())!=null){
-                
-                String[] data =linea.split(",");
-                puestos.add(new puesto(new Medico(data[0],data[1],data[2],data[3],data[4]),data[4]));
-                
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return puestos;
-    }
-    
-    
-    
-    public static List<String> leerSintomas(String nombreSintoma){
-        String filename ="src/Archivos/sintomas.txt";
-        List<String> sintomas=new LinkedList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-            String linea;
-            while((linea=br.readLine())!=null){
-                String[] info =linea.split("\\|");
-                if(info[0].equals(nombreSintoma)){
-                    sintomas.add(info[1]);
-                    sintomas.add(info[2]);
-                }
-                
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return sintomas;
-    }
 }

@@ -34,8 +34,8 @@ public class secciones {
         stageMedico.setTitle("Registrar Puesto");
         ventanaDoctorPuesto ventanaDoctor = new ventanaDoctorPuesto();
         stageMedico.setScene(new Scene(ventanaDoctor.getRootDoctor()));
-        stageMedico.setHeight(550);
-        stageMedico.setWidth(590);
+        stageMedico.setHeight(450);
+        stageMedico.setWidth(460);
         stageMedico.show();
     }
      public void pantallaPuesto() throws InterruptedException{
@@ -43,8 +43,8 @@ public class secciones {
         stagePuesto.setTitle("asignar/eliminar Puesto");
         VentanaAdministarPuesto ventanaPuesto = new VentanaAdministarPuesto();
         stagePuesto.setScene(new Scene(ventanaPuesto.getRootAdministrar()));
-        stagePuesto.setHeight(550);
-        stagePuesto.setWidth(480);
+        stagePuesto.setHeight(500);
+        stagePuesto.setWidth(400);
         stagePuesto.show();
     }
     

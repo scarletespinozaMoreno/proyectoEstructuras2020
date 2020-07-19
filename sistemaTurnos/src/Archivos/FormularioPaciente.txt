@@ -1,8 +1,2 @@
-Scarlet,Espinoza,femenino,23,fiebre
-Eduardo,Moreno,Masculino,28,congestión nasal
-Ricardo,Villegas,Masculino,20,vómito
-Andres,Ramos,Masculino,26,fiebre
-julio,Montalvan,Masculino,34,resfrio
-Antonio,Musso,Masculino,23,fiebre
-Julio,Guzman,masculino,56,fiebre
-samantha,rivera,femenino,23,congestión nasal
+Scarlet,Espinoza,Femenino,12,vómito,1,B
+Andres,Juarez,masculino,12,fiebre,0,A

@@ -9,6 +9,7 @@ package Modulo1;
 import ListaCircularDoble.ListaCircularDoble;
 import clases.LecturaEscritura;
 import clases.Medico;
+import clases.paciente;
 import clases.puesto;
 import clases.turno;
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -49,22 +51,36 @@ public class PantallaPrincipal {
     private MediaView reproductorVideos;
     static Label mostrarTurno;
     static Label mostrarPuesto;
-     private final secciones pantallas = new secciones();
-     static final PriorityQueue<turno> TURNO = new PriorityQueue<>((turno t1, turno t2)-> t1.getTipo()-t2.getTipo());
-    static final LinkedList<puesto> PUESTO_MEDICO = new LinkedList<>();
-    static final ArrayList<puesto> PUESTO=new ArrayList<>();
+    private static int turno=0;
+    private final secciones pantallas = new secciones();
+    static PriorityQueue<paciente> PACIENTE = new PriorityQueue<>((paciente p1, paciente p2)-> p1.getSintoma().getPrioridad()-p2.getSintoma().getPrioridad());
+    static LinkedList<puesto> PUESTO_MEDICO = new LinkedList<>();
+    static ArrayList<Medico> MEDICO=new ArrayList<>();
     public PantallaPrincipal() throws InterruptedException {
         OrganizarVentana();
+    }
+
+    public static PriorityQueue<paciente> getPACIENTE() {
+        return PACIENTE;
+    }
+
+
+    public static ArrayList<Medico> getMEDICO() {
+        return MEDICO;
+    }
+
+    public static void setMEDICO(ArrayList<Medico> MEDICO) {
+        PantallaPrincipal.MEDICO = MEDICO;
     }
     
     
     
 
     public void OrganizarVentana() throws InterruptedException{
-        TURNO.addAll(turno.asignarTurnos());
-        //puesto p=new puesto(new Medico("0965487568","Julian","Perez","Medicina General","Masculino"),"01");
-        PUESTO.addAll(LecturaEscritura.leerPuesto());
-        PUESTO_MEDICO.addAll(PUESTO);
+        
+        MEDICO.addAll(LecturaEscritura.leerDoctor());
+        PACIENTE.addAll(LecturaEscritura.leerCliente());
+        PUESTO_MEDICO.addAll(puesto.asignarPuestos());
         root=new BorderPane();
         root.setTop(crearTop());
         root.setBottom(crearButton());
@@ -162,10 +178,12 @@ public class PantallaPrincipal {
         cuadro2Turno.setAlignment(Pos.CENTER);
         cuadro2Turno.setStyle("-fx-background-color:#87CEFA");
         
-        mostrarTurno=new Label("");
-        if (!TURNO.isEmpty())
-            mostrarTurno.setText(TURNO.peek().getPaciente().getLetra()+
-                    String.valueOf(TURNO.peek().getNumero()));
+        //
+         mostrarTurno=new Label("");
+        if (!PACIENTE.isEmpty())
+            mostrarTurno.setText(PACIENTE.peek().getSintoma().getLetra()+
+                    String.valueOf(PACIENTE.peek().getTurno().getNumero()));
+                
         cuadro2Turno.getChildren().add(mostrarTurno);
         turno.getChildren().addAll(cuadro1Titulo,cuadro2Turno);
         
@@ -190,8 +208,10 @@ public class PantallaPrincipal {
         cuadro3Titulo.getChildren().add(encabezado2);
        
         
-        mostrarPuesto=new Label("");
+         mostrarPuesto=new Label("");
         puesto p=PUESTO_MEDICO.peek();
+        
+        
         mostrarPuesto.setText(p.getNombrePuesto());
         cuadro4Puesto.getChildren().add(mostrarPuesto);
         puesto.getChildren().addAll(cuadro3Titulo,cuadro4Puesto);
@@ -244,7 +264,9 @@ public class PantallaPrincipal {
          return izquierda;
      }
        
-        
+     public static int generarTurno(){
+         return ++turno;
+     }   
      
     public class tiempo implements Runnable{
 
@@ -283,6 +305,14 @@ public class PantallaPrincipal {
             mediaPlayer.setOnEndOfMedia(() -> {
                 iniciarlizarMediaPlayer(mediaView, direcciones);
             });
+            mediaView.setOnMouseClicked(e->{
+            if(mediaView.getMediaPlayer().getStatus()==MediaPlayer.Status.PLAYING){
+                mediaView.getMediaPlayer().pause();
+            }else if(mediaView.getMediaPlayer().getStatus()==MediaPlayer.Status.PAUSED){
+                
+                mediaView.getMediaPlayer().play();
+            }
+        });
             mediaView.setMediaPlayer(mediaPlayer);
 
             } 

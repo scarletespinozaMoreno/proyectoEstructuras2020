@@ -1,6 +1,0 @@
-0922520523,Scarlet,Espinoza,Femenino,pediatra
-0922520645,Domenica,Recalde,Femenino,ginecologa
-0923467654,Christian,Freire,Masculino,psicologo
-0912345678,Adrian,Mejias,Mascuino,Oftalmologo
-0922520644,Domenica,Vera,Femenino,Medicina General
-1202031439,Ricardo,Vilcacundo,Masculino,Cirujano
