@@ -151,6 +151,7 @@ public class ventanaDoctorPuesto {
         fieldCedula.setText("");
         fieldGenero.setText("");
         fieldProfesion.setText(" ");
+        mensaje.setText(" ");
         
     }
   

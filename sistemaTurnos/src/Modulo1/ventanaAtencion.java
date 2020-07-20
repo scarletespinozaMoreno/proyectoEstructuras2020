@@ -104,7 +104,7 @@ public class ventanaAtencion {
         //
         puesto p = PUESTO_MEDICO.peek();
         fieldNombreMedico.setText(String.valueOf(p.getMedico().getNombre()));
-        fieldApellidoMedico.setText(String.valueOf(p.getNombrePuesto()));
+        fieldApellidoMedico.setText(String.valueOf(p.getMedico().getApellido()));
 
         fieldNombre.setEditable(false);
         fieldApellido.setEditable(false);
