@@ -41,6 +41,8 @@ public class VentanaAdministarPuesto {
     private TextField fieldtitulo,fieldcedula,fieldnombre,fieldapellido,fieldpuesto,fieldprofesion;
     private Button Buscar,Asignar,Eliminar,Limpiar;
     int num =0;
+    private final secciones pantallas = new secciones();
+
     public VentanaAdministarPuesto() throws InterruptedException {
         OrganizarVentana();
     }
@@ -134,10 +136,14 @@ public class VentanaAdministarPuesto {
           
         });
         
-         Eliminar= new Button("Eliminar");
+         Eliminar= new Button("Puestos");
          Eliminar.setOnAction((e)->{
-          buttonEliminar();
-          buttonBorrar();
+          try {
+                pantallas.pantallaEliminarPuesto();
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
           
         });
          
@@ -175,21 +181,43 @@ public class VentanaAdministarPuesto {
                     fieldnombre.setText(m.getNombre());
                     fieldapellido.setText(m.getApellido());
                     fieldprofesion.setText(m.getProfesion());
+                    return;
               }
- 
          }  
+        
+        fieldnombre.setText("");
+        fieldapellido.setText("");
+        fieldprofesion.setText(" ");
+        mensaje.setTextFill(Color.GREEN);
+        mensaje.setText("Medico ya esta Asignado");
     }
      public void buttonAsignar()throws FileNotFoundException, IOException{
-         
-         
+          Medico m = new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText());
+          eliminarMedico(PantallaPrincipal.MEDICO, m);
           puesto p =new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText());
                if(!listaContienePuesto(PantallaPrincipal.PUESTO_MEDICO, p)){
+                     
                       PantallaPrincipal.PUESTO_MEDICO.add(new puesto(new Medico(fieldcedula.getText(),fieldnombre.getText(),fieldapellido.getText(),fieldprofesion.getText()),fieldpuesto.getText()));
                      mensaje.setTextFill(Color.GREEN);
-                     mensaje.setText("Registro completo");
+                     mensaje.setText("Medico Asignado");
                     }
                
                 }
+     
+     private void eliminarMedico(ArrayList<Medico> medicos,Medico m){
+         ListIterator<Medico> it= medicos.listIterator();
+          while(it.hasNext()){
+                      Medico medico= it.next();
+                      System.out.println("hola");
+                    if(medico.getCedula().equals(m.getCedula())){
+                        it.remove();
+                        System.out.println("entro");
+                       
+                    }
+                }
+                
+         
+     }
     private boolean listaContienePuesto(LinkedList<puesto> puestos,puesto p){
                 ListIterator<puesto> it= puestos.listIterator();
                 while(it.hasNext()){
@@ -202,16 +230,6 @@ public class VentanaAdministarPuesto {
                 }
                 return false;
        }
-     public void buttonEliminar(){
-         Iterator <puesto>it = PUESTO_MEDICO.listIterator();
-         while(it.hasNext()){
-             puesto p=it.next();
-             if(p.getMedico().getCedula().equals(fieldcedula.getText())){
-                    PUESTO_MEDICO.remove(p);
-             }
-         }
-         
-        }
      
        public void buttonBorrar(){
         fieldcedula.setText("");
@@ -219,6 +237,7 @@ public class VentanaAdministarPuesto {
         fieldapellido.setText("");
         fieldpuesto.setText("");
         fieldprofesion.setText("");
+        mensaje.setText(" ");
         
     }
     

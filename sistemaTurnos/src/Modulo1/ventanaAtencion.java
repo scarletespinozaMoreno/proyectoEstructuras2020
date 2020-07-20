@@ -167,6 +167,7 @@ public class ventanaAtencion {
         } else if (!PantallaPrincipal.PACIENTE.isEmpty()) {
             // se extrae el turno que sera atendido
             paciente t = PantallaPrincipal.PACIENTE.poll();
+            PUESTO_MEDICO.peek().setPaciente(t);
             t.setDiagnostico(diagnostico.getText());
             if (PantallaPrincipal.PACIENTE.isEmpty()) {
                 PantallaPrincipal.mensaje.setText("Turnos Atendidos");
@@ -181,7 +182,12 @@ public class ventanaAtencion {
     public static void actualizarTurno() {
         PantallaPrincipal.mostrarTurno.setText(String.valueOf(PantallaPrincipal.PACIENTE.peek().getSintoma().getLetra() + PantallaPrincipal.PACIENTE.peek().getTurno().getNumero()));
         puesto p = PantallaPrincipal.PUESTO_MEDICO.poll();
-        PantallaPrincipal.mostrarPuesto.setText(PantallaPrincipal.PUESTO_MEDICO.peek().getNombrePuesto());
+        if (PantallaPrincipal.PUESTO_MEDICO.isEmpty()) {
+              PantallaPrincipal.mostrarPuesto.setText(p.getNombrePuesto());
+         }else{
+                PantallaPrincipal.mostrarPuesto.setText(PantallaPrincipal.PUESTO_MEDICO.peek().getNombrePuesto());
+               
+      } 
         mensajeError.setTextFill(Color.GREEN);
         PantallaPrincipal.PUESTO_MEDICO.offer(p);
         secciones.stagePaciente.close();

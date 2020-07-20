@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * @author scarlet Espinoza
  */
 public class secciones {
-    static Stage stageRegistrar, stageMedico,stagePaciente,stagePuesto;
+    static Stage stageRegistrar, stageMedico,stagePaciente,stagePuesto,stageEliminar;
     
 
     public secciones() {
@@ -31,7 +31,7 @@ public class secciones {
     
     public void pantallaMedico() throws InterruptedException{
         stageMedico = new Stage();
-        stageMedico.setTitle("Registrar Puesto");
+        stageMedico.setTitle("Registrar Medico");
         ventanaDoctorPuesto ventanaDoctor = new ventanaDoctorPuesto();
         stageMedico.setScene(new Scene(ventanaDoctor.getRootDoctor()));
         stageMedico.setHeight(450);
@@ -40,7 +40,7 @@ public class secciones {
     }
      public void pantallaPuesto() throws InterruptedException{
         stagePuesto = new Stage();
-        stagePuesto.setTitle("asignar/eliminar Puesto");
+        stagePuesto.setTitle("asignar Puesto");
         VentanaAdministarPuesto ventanaPuesto = new VentanaAdministarPuesto();
         stagePuesto.setScene(new Scene(ventanaPuesto.getRootAdministrar()));
         stagePuesto.setHeight(500);
@@ -54,8 +54,18 @@ public class secciones {
         stagePaciente.setTitle("Atencion");
         ventanaAtencion ventanaA = new ventanaAtencion();
         stagePaciente.setScene(new Scene(ventanaA.getRootAtencion()));
-        stagePaciente.setHeight(550);
-        stagePaciente.setWidth(700);
+        stagePaciente.setHeight(500);
+        stagePaciente.setWidth(730);
         stagePaciente.show();
+    }
+    
+    public void pantallaEliminarPuesto() throws InterruptedException{
+        stageEliminar = new Stage();
+        stageEliminar.setTitle("eliminar Puesto");
+        ventanaEliminarPuesto ventanaeliminarPuesto = new ventanaEliminarPuesto();
+        stageEliminar.setScene(new Scene(ventanaeliminarPuesto.getRootEliminar()));
+        stageEliminar.setHeight(500);
+        stageEliminar.setWidth(400);
+        stageEliminar.show();
     }
 }

@@ -102,6 +102,8 @@ public class VentanaFormularioPaciente {
         paciente = new paciente(fieldNombre.getText(), fieldApellido.getText(),
                 fieldGenero.getText(), Integer.valueOf(fieldEdad.getText()), (sintoma) combSintomas.getValue());
         PantallaPrincipal.PACIENTE.offer(paciente);
+        mensaje.setStyle("-fx-text-fill:#2E86C1");
+        mensaje.setText("Registrado");
         if (PantallaPrincipal.PACIENTE.size() == 1) {
             ventanaAtencion.actualizarTurno();
         }
@@ -113,6 +115,7 @@ public class VentanaFormularioPaciente {
         fieldApellido.setText("");
         fieldEdad.setText("");
         fieldGenero.setText("");
+        mensaje.setText(" ");
 
     }
 

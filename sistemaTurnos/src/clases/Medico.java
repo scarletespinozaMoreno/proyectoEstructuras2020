@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.Objects;
+
 /**
  *
  * @author scarlet Espinoza
@@ -27,6 +29,26 @@ public class Medico extends Persona{
     public String getCedula() {
         return cedula;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medico other = (Medico) obj;
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     public String getProfesion() {
         return Profesion;
