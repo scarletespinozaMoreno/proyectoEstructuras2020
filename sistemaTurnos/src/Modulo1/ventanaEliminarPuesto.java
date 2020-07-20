@@ -34,7 +34,7 @@ public class ventanaEliminarPuesto {
     private final secciones pantallas = new secciones();
     private Label titulo, cedula, nombre, apellido, puesto, texto, profesion, mensaje;
     private TextField fieldtitulo, fieldcedula, fieldnombre, fieldapellido, fieldpuesto, fieldprofesion;
-    private Button Buscar, Eliminar;
+    private Button Buscar, Eliminar,limpiar;
 
     public ventanaEliminarPuesto() throws InterruptedException {
         OrganizarVentana();
@@ -117,8 +117,15 @@ public class ventanaEliminarPuesto {
 
             
         });
+        
+        limpiar= new Button("limpiar");
+        limpiar.setOnAction((e) -> {
+            buttonBorrar();
 
-        botones.getChildren().addAll(Buscar, Eliminar);
+            
+        });
+
+        botones.getChildren().addAll(Buscar, Eliminar,limpiar);
         abajo.getChildren().addAll(botones, mensaje);
         botones.setSpacing(20);
         botones.setAlignment(Pos.CENTER);
@@ -182,7 +189,7 @@ public class ventanaEliminarPuesto {
         fieldapellido.setText("");
         fieldpuesto.setText("");
         fieldprofesion.setText("");
-        mensaje.setText("eliminado");
+        mensaje.setText(" ");
 
     }
 
